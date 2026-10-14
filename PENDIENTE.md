@@ -4,10 +4,14 @@
 
 Hoy la web es estática y funciona en Vercel, salvo "Buscar novedades" y "Refrescar datos": dependen de `scripts/data-server.mjs`, que reescribe `public/data` en disco. En Vercel no se puede.
 
+Hecho: repositorio en GitHub y proyecto en Vercel con build command `npm run build`, usando los JSON de `public/data` subidos al repo.
+
+Problema encontrado: wowforevertools.com devuelve 403 a las máquinas de Vercel (`npm run data` falla en el build). Por eso los datos se regeneran en local y se suben con un push.
+
 Plan:
 
-- [ ] Convertir la carpeta en repositorio git y conectarlo a Vercel.
-- [ ] Build command `npm run data && npm run build`, para que cada despliegue baje los datos al día. Si una fuente falla, el despliegue falla y sigue el anterior.
+- [ ] Decidir cómo refrescar en producción. Opciones: regenerar en local y hacer push (lo actual); GitHub Action programada que ejecute `npm run data` y haga commit (comprobar si las fuentes no bloquean también a GitHub); o proxy/headers para esa fuente.
+- [ ] Si se vuelve a `npm run data && npm run build` en Vercel, hace falta resolver antes el 403. Si una fuente falla, el despliegue falla y sigue el anterior.
 - [ ] Output directory: `dist/wow-leveling/browser`. Comprobar la versión de Node que pide Angular 22.
 - [ ] `vercel.json` con un rewrite de todas las rutas a `/index.html`, para que recargar en `/mascotas` no dé 404.
 - [ ] Crear un Deploy Hook en Vercel y guardar su URL como variable de entorno secreta (`DEPLOY_HOOK_URL`).
