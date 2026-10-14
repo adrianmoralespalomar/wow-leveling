@@ -1,0 +1,171 @@
+{
+  "updatedAt": "2026-10-14",
+  "note": "En la beta solo se puede jugar Darkspear Islands (desde el 6 de octubre); Warsong Gulch, Arathi Basin y Alterac Valley llegan con el lanzamiento. Tramos, recompensas y reglas salen de guías de fans con datos del cliente: compruébalos en el juego.",
+  "rules": [
+    "Te apuntas con el maestro de batalla de cualquier capital (Orgrimmar, Undercity o Thunder Bluff). Darkspear Islands tiene además cola en Merchant Coast, en The Barrens.",
+    "Todos los campos se juegan por tramos de 10 niveles (10-19, 20-29... y 60), salvo Alterac Valley, que tiene un único tramo del 51 al 60.",
+    "Cada campo da sus propias marcas: 3 por victoria y 1 por derrota. Cada tipo de marca compra ranuras distintas.",
+    "El honor es una moneda para comprar equipo, con tope de 25.000 en la beta. Los precios rondan un 50% más que en Classic.",
+    "Hay 14 rangos que se suben con puntos de rango (campos de batalla y misiones JcJ), con tope semanal: el rango 14 pide al menos 10 semanas. Se reinician cada temporada.",
+    "El set raro JcJ se compra desde el nivel 55 con honor y marcas, sin rango. Las mejoras épicas piden sellos desde el rango 8.",
+    "Cada semana un campo es el festivo y da más honor y puntos de rango. La rotación es Darkspear Islands, Arathi Basin y Warsong Gulch.",
+    "No hay JcJ puntuado ni arenas anunciadas. Los addons que leen el registro de combate están limitados en Forever."
+  ],
+  "battlegrounds": [
+    {
+      "name": "Warsong Gulch",
+      "minLevel": 10,
+      "maxLevel": 60,
+      "teamSize": "10 contra 10",
+      "objective": "Capturar tres veces la bandera enemiga.",
+      "hordeReputation": "Warsong Outriders",
+      "markSlots": "Manos, piernas y muñecas",
+      "isNew": false,
+      "isPlayableInBeta": false,
+      "note": "Su reputación vende Outrider's Bow cada 10 niveles (18, 28, 38, 48 y 58): una alternativa real a los arcos de mazmorra también para subir."
+    },
+    {
+      "name": "Arathi Basin",
+      "minLevel": 20,
+      "maxLevel": 60,
+      "teamSize": "15 contra 15",
+      "objective": "Llegar antes a 2.000 recursos controlando bases.",
+      "hordeReputation": "The Defilers",
+      "markSlots": "Hombros, pecho, cintura y capas",
+      "isNew": false,
+      "isPlayableInBeta": false,
+      "note": "The Defilers venden botas y cinturones de cuero y malla con Agilidad y Aguante desde el 28, y el Defiler's Talisman."
+    },
+    {
+      "name": "Darkspear Islands",
+      "minLevel": 30,
+      "maxLevel": 60,
+      "teamSize": "15 contra 15",
+      "objective": "Llegar antes a 2.000 puntos con cuatro puntos de captura y una bandera central.",
+      "hordeReputation": "Darkspear Raiders",
+      "markSlots": "Pies, collares, armas de una mano y armas a distancia",
+      "isNew": true,
+      "isPlayableInBeta": true,
+      "note": "Campo nuevo de Forever. Sus recompensas por reputación todavía no están en los datos."
+    },
+    {
+      "name": "Alterac Valley",
+      "minLevel": 51,
+      "maxLevel": 60,
+      "teamSize": "40 contra 40",
+      "objective": "Matar al general enemigo.",
+      "hordeReputation": "Frostwolf Clan",
+      "markSlots": "Cabeza y armas de dos manos",
+      "isNew": false,
+      "isPlayableInBeta": false,
+      "note": "La misión The Legend of Korrak da Bloodseeker (32,3 DPS, +7 Agilidad), uno de los mejores arcos antes de banda."
+    }
+  ],
+  "brackets": [
+    {
+      "minLevel": 10,
+      "maxLevel": 19,
+      "battlegrounds": ["Warsong Gulch"],
+      "summary": "Solo Warsong Gulch. Sin Aimed Shot ni trampas de congelación, ganas a base de ralentizar: Concussive Shot con su aturdimiento del talento, Wing Clip y Serpent Sting.",
+      "priorities": [
+        "Improved Concussive Shot a 5/5 cuanto antes: un 20% de aturdir 3 s en cada Concussive Shot.",
+        "Persigue y frena al portador de la bandera enemiga; con Hawk Eye (15-17) disparas desde más lejos.",
+        "Mascota con Tendon Rip o Charge para pegarse a los que huyen."
+      ],
+      "itemIds": [20437, 20442, 20429, 6469, 271202],
+      "twinkNote": "Si quieres quedarte en el 19: Outrider's Bow y Scout's Medallion de Warsong, Venomstrike y las piezas de Agilidad de Ruins of Lordaeron. Forever no ha confirmado si se puede bloquear la experiencia; sin eso, ganar te sube de nivel."
+    },
+    {
+      "minLevel": 20,
+      "maxLevel": 29,
+      "battlegrounds": ["Warsong Gulch", "Arathi Basin"],
+      "summary": "Llegan Aimed Shot, Freezing Trap y Disengage al 20, y Frost Trap al 28. En Forever las trampas se ponen en combate: tu mejor defensa contra los cuerpo a cuerpo.",
+      "priorities": [
+        "Abre con Aimed Shot desde fuera de su vista y remata con Arcane Shot en movimiento.",
+        "Freezing Trap a tus pies cuando un guerrero o pícaro se te eche encima, y aléjate.",
+        "Scorpid Sting (22) contra guerreros y pícaros; Serpent Sting contra el resto."
+      ],
+      "itemIds": [19561, 19537, 19513, 20188, 20191, 21120, 274084],
+      "twinkNote": "El tramo 29 es caro de mantener: Quilboar Blaster (misión) y el Outrider's Bow del 28 son lo mejor a distancia."
+    },
+    {
+      "minLevel": 30,
+      "maxLevel": 39,
+      "battlegrounds": ["Warsong Gulch", "Arathi Basin", "Darkspear Islands"],
+      "summary": "Feign Death al 30, Scatter Shot (talento) al 31, Flare al 32 y Viper Sting al 36. Es el tramo donde el cazador ya tiene todas sus herramientas de control.",
+      "priorities": [
+        "Scatter Shot para cortar un lanzamiento o ganar los metros que necesitas; después, trampa o vendaje.",
+        "Viper Sting a sacerdotes, chamanes, druidas y paladines: sin maná no curan.",
+        "Flare sobre los nodos y la bandera para destapar pícaros y druidas en sigilo."
+      ],
+      "itemIds": [19560, 19536, 19512, 20187, 21116, 18427, 15200],
+      "twinkNote": null
+    },
+    {
+      "minLevel": 40,
+      "maxLevel": 49,
+      "battlegrounds": ["Warsong Gulch", "Arathi Basin", "Darkspear Islands"],
+      "summary": "Malla al 40 y Sniper Shot como último punto de Puntería. Desde el 41 la build JcJ pasa a Survival para aguantar a los cuerpo a cuerpo.",
+      "priorities": [
+        "Cambia el cuero por malla con Aguante: las Defiler's Chain Greaves son de lo mejor del tramo.",
+        "Aspect of the Pack (40) solo para moverte en grupo: si os pegan, quedáis aturdidos.",
+        "Deflection e Improved Wing Clip hacen que el cuerpo a cuerpo deje de ser un problema."
+      ],
+      "itemIds": [19559, 19535, 20155, 20151, 18435, 16341],
+      "twinkNote": null
+    },
+    {
+      "minLevel": 50,
+      "maxLevel": 59,
+      "battlegrounds": ["Warsong Gulch", "Arathi Basin", "Darkspear Islands", "Alterac Valley"],
+      "summary": "Alterac Valley abre al 51 y es el mejor sitio para reputación y misiones. Del 55 en adelante puedes ir comprando el set raro JcJ con honor y marcas.",
+      "priorities": [
+        "Deterrence y Counterattack: aguanta 10 s a un cuerpo a cuerpo y devuélvele la inmovilización.",
+        "En Alterac Valley haz las misiones de Frostwolf: Bloodseeker al 57 es tu arco hasta el 60.",
+        "Guarda el honor: al 60 todo el equipo de honor sube de nivel."
+      ],
+      "itemIds": [19558, 19534, 20154, 20150, 19083, 19095, 19319, 19107],
+      "twinkNote": null
+    },
+    {
+      "minLevel": 60,
+      "maxLevel": 60,
+      "battlegrounds": ["Warsong Gulch", "Arathi Basin", "Darkspear Islands", "Alterac Valley"],
+      "summary": "Set raro JcJ con honor y marcas sin rango, épicas de reputación en Exaltado y armas de rango 14 si haces temporada completa.",
+      "priorities": [
+        "Exaltado con Warsong Outriders: Outrider's Chain Leggings (+35 Agilidad).",
+        "The Defilers en Exaltado: Defiler's Chain Pauldrons y Deathguard's Cloak.",
+        "Don Julio's Band (Frostwolf Clan) da golpe y crítico, rara en anillos JcJ."
+      ],
+      "itemIds": [22673, 20158, 20068, 19325, 19107],
+      "twinkNote": null
+    }
+  ],
+  "combatTips": [
+    { "title": "Abre desde el máximo alcance", "description": "Hawk Eye suma 6 m. Aimed Shot (2 s de lanzamiento en Forever) solo si no te ven; después, Arcane Shot y picaduras mientras te mueves." },
+    { "title": "La zona muerta sigue ahí", "description": "Entre 5 y 8 m no puedes disparar. Con un cuerpo a cuerpo encima: Wing Clip, Freezing Trap a tus pies y sal con Concussive Shot." },
+    { "title": "Trampas en combate", "description": "En Forever no necesitas Feign Death para poner trampas. Freezing Trap para pelar y Frost Trap (28) en el paso del portador de la bandera." },
+    { "title": "La picadura según el rival", "description": "Viper Sting (36) a sanadores y lanzadores, Scorpid Sting (22) a guerreros y pícaros, Serpent Sting al resto." },
+    { "title": "Scatter Shot", "description": "Desorienta 4 s y se rompe con daño. Sirve para cortar un lanzamiento largo o para encadenar con Freezing Trap." },
+    { "title": "Feign Death", "description": "Desde el 30. Quita el objetivo a quien te esté atacando; levántate y pon una trampa o vuelve a disparar." },
+    { "title": "Flare contra el sigilo", "description": "Desde el 32. Lánzalo sobre la bandera y los nodos de Arathi Basin: pícaros y druidas en sigilo quedan a la vista 30 s." },
+    { "title": "Scare Beast", "description": "Asusta mascotas de cazador y, como en Classic, druidas en forma de oso o felino. Comprueba en la beta que siga funcionando sobre druidas." },
+    { "title": "Tranquilizing Shot no sirve en JcJ", "description": "En Forever llega al 60 y solo quita Frenzy a criaturas. No lo cuentes para disipar jugadores." },
+    { "title": "Orco: Blood Fury y Hardiness", "description": "Blood Fury con Rapid Fire para el estallido de daño. Hardiness acorta un 20% los aturdimientos: aguantas mejor a pícaros y guerreros." },
+    { "title": "Nunca Aspect of the Cheetah en combate", "description": "Al recibir daño te aturde 4 s. Ponlo para moverte entre nodos y cambia a Aspect of the Hawk o of the Monkey al entrar." }
+  ],
+  "pets": [
+    { "familyId": 26, "reason": "Mine! desarma 4 s: contra guerreros y pícaros, tus peores rivales, es lo más útil." },
+    { "familyId": 25, "reason": "Tendon Rip ralentiza un 50%: con Concussive Shot nadie se te acerca y el portador de la bandera no escapa." },
+    { "familyId": 24, "reason": "Sonic Blast alarga un 60% los lanzamientos: buena contra sanadores y magos." },
+    { "familyId": 6, "reason": "Dismember reduce un 50% la curación recibida: para centrar a un objetivo con sanador." },
+    { "familyId": 3, "reason": "Web inmoviliza: otra forma de mantener lejos a un cuerpo a cuerpo." }
+  ],
+  "sources": [
+    { "label": "Icy Veins: JcJ en WoW Forever", "url": "https://www.icy-veins.com/wow-forever/pvp-overview" },
+    { "label": "mmonster: campos de batalla", "url": "https://mmonster.co/wow-forever/guides/pvp/battlegrounds" },
+    { "label": "mmonster: honor y rangos", "url": "https://mmonster.co/wow-forever/guides/pvp" },
+    { "label": "wowforeverbuilds: builds JcJ de cazador", "url": "https://wowforeverbuilds.com/pvp/hunter" },
+    { "label": "LFCarry: cazador JcJ en Forever", "url": "https://lfcarry.com/guides/wow-forever-hunter-pvp" }
+  ]
+}

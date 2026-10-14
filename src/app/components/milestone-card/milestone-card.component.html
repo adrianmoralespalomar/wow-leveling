@@ -13,12 +13,22 @@
       }
     </div>
   }
+  @if (view().milestone.advice) {
+    <p class="milestone-advice">{{ view().milestone.advice }}</p>
+  }
   @if (view().alternatives.length) {
     <div class="milestone-alternatives">
-      <span class="muted">Mientras tanto o en su lugar</span>
-      @for (item of view().alternatives; track $index) {
-        <app-item-link [item]="item" [showName]="false" iconSize="small"/>
-      }
+      <p class="milestone-alternatives-title">Otras formas de cubrirlo</p>
+      <ul class="milestone-alternative-list">
+        @for (item of view().alternatives; track $index) {
+          <li class="milestone-alternative">
+            @if (item) {
+              <span class="chip">{{ routeLabels[getAcquisitionRoute(item)] }}</span>
+            }
+            <app-item-link [item]="item" iconSize="small" [detail]="item ? describeItemBriefly(item) : null"/>
+          </li>
+        }
+      </ul>
     </div>
   }
 </div>

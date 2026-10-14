@@ -4,12 +4,15 @@ Guía de subida del 1 al 60 para un **cazador orco de Puntería** en *World of W
 
 ## Secciones
 
-- **Ahora**: lo que te toca en tu nivel. Talento, instructor, arma a distancia (hito actual y siguiente), zonas, mazmorras con su botín de cazador y la mejor pieza por ranura.
+El selector **PvE / PvP** de la cabecera cambia la build de talentos, los pesos del equipo (en PvP el Aguante pesa más) y los addons que se muestran.
+
+- **Ahora**: lo que te toca en tu nivel. Talento, instructor, arma a distancia (hito actual y siguiente, con otras formas de cubrirlo y si compensa comprar o esperar), zonas, mazmorras con su botín de cazador y la mejor pieza por ranura con alternativas por vía (misión, subasta, mazmorra, campo de batalla). Si una misión cercana iguala lo de ahora, te avisa de que no gastes. En modo PvP, también tu tramo de campos de batalla.
 - **Ruta**: tramos de 10 niveles con zonas, mazmorras e hitos.
-- **Talentos**: los tres árboles de la beta con dos builds (Puntería y Bestias) y el orden de puntos nivel a nivel.
+- **Talentos**: los tres árboles de la beta con dos builds para subir (Puntería y Bestias), una JcJ (Puntería y Survival) y el orden de puntos nivel a nivel.
 - **Mascotas**: qué mascota llevar en cada tramo, bestias que puedes domar a tu nivel (con enlace al mapa), familias con su habilidad propia y las reglas de mascotas de Forever.
 - **Equipo**: tabla por ranura con todo lo que puede conseguir la Horda, ordenado por nivel.
-- **Addons**: los que usa la gente en Forever y su estado.
+- **Campos de batalla**: los cuatro campos de Forever, qué jugar y qué equipo de reputación y honor llevar en cada tramo, cómo se juega el cazador, mascotas para JcJ y las reglas de honor y rangos.
+- **Addons**: los que usa la gente en Forever y su estado, según el modo.
 - **Mi personaje**: pega el texto del addon `WowLevelingExport` y verás tu equipo, qué ranuras puedes mejorar y tus talentos.
 
 ## Arrancar
@@ -36,6 +39,7 @@ Todo vive en `public/data` y se carga en tiempo de ejecución, así que se puede
 | `pet-abilities.json` | Rangos de habilidad de mascota, coste en puntos y bestias que los enseñan, vía wow-petopia.com | `npm run data` |
 | `meta.json` | Fecha de generación y versión del cliente | `npm run data` |
 | `pet-guide.json` | Mascota por tramo, familias y reglas | A mano |
+| `pvp-guide.json` | Campos de batalla, tramos, consejos y mascotas JcJ | A mano |
 | `talent-builds.json` | Builds y orden de puntos | A mano |
 | `leveling-guide.json` | Zonas, mazmorras, hitos de armas y consejos | A mano |
 | `addons.json` | Lista de addons | A mano |

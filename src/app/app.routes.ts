@@ -28,6 +28,12 @@ export const routes: Routes = [
     loadComponent: () => import('./pages/gear-page/gear-page.component').then((module) => module.GearPageComponent),
   },
   {
+    path: 'campos-de-batalla',
+    title: 'Campos de batalla | Rastro',
+    loadComponent: () =>
+      import('./pages/battlegrounds-page/battlegrounds-page.component').then((module) => module.BattlegroundsPageComponent),
+  },
+  {
     path: 'addons',
     title: 'Addons | Rastro',
     loadComponent: () => import('./pages/addons-page/addons-page.component').then((module) => module.AddonsPageComponent),

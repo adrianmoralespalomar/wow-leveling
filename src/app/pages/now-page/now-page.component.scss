@@ -218,6 +218,19 @@
   font-size: 0.875rem;
 }
 
+.pvp-section {
+  display: grid;
+  gap: 12px;
+}
+
+.pvp-heading {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 8px 20px;
+}
+
 .gear-section {
   display: grid;
   gap: 12px;

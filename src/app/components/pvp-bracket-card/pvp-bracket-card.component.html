@@ -1,0 +1,34 @@
+<div class="bracket-header">
+  <h3 class="bracket-range">
+    {{ view().bracket.minLevel === view().bracket.maxLevel ? view().bracket.minLevel : view().bracket.minLevel + '-' + view().bracket.maxLevel }}
+  </h3>
+  @if (isCurrent()) {
+    <span class="chip chip-accent">Tu tramo</span>
+  }
+  <p class="bracket-battlegrounds muted">{{ view().bracket.battlegrounds.join(', ') }}</p>
+</div>
+
+<p class="bracket-summary">{{ view().bracket.summary }}</p>
+
+<div class="bracket-body">
+  <div class="bracket-column">
+    <h4 class="column-title">Prioridades</h4>
+    <ul class="priority-list">
+      @for (priority of view().bracket.priorities; track $index) {
+        <li>{{ priority }}</li>
+      }
+    </ul>
+  </div>
+  <div class="bracket-column">
+    <h4 class="column-title">Equipo de la Horda para el tramo</h4>
+    <div class="bracket-items">
+      @for (item of view().items; track $index) {
+        <app-item-link [item]="item" iconSize="small" [detail]="item ? describeItemBriefly(item) : null"/>
+      }
+    </div>
+  </div>
+</div>
+
+@if (view().bracket.twinkNote) {
+  <p class="bracket-twink">{{ view().bracket.twinkNote }}</p>
+}

@@ -1,3 +1,4 @@
+import { GameMode } from './game-mode.type';
 import { ITEM_STAT_KEYS } from './item-stat-keys.const';
 
 /**
@@ -16,6 +17,17 @@ export const ITEM_STAT_WEIGHTS: Record<string, number> = {
   [ITEM_STAT_KEYS.ATTACK_POWER]: 0.45,
   [ITEM_STAT_KEYS.RANGED_ATTACK_POWER]: 0.42,
   [ITEM_STAT_KEYS.ARMOR]: 0.005,
+};
+/** En campos de batalla vivir más pesa casi tanto como pegar: el Aguante sube y la armadura cuenta algo más. */
+export const PVP_ITEM_STAT_WEIGHTS: Record<string, number> = {
+  ...ITEM_STAT_WEIGHTS,
+  [ITEM_STAT_KEYS.STAMINA]: 0.8,
+  [ITEM_STAT_KEYS.INTELLECT]: 0.35,
+  [ITEM_STAT_KEYS.ARMOR]: 0.01,
+};
+export const ITEM_STAT_WEIGHTS_BY_GAME_MODE: Record<GameMode, Record<string, number>> = {
+  pve: ITEM_STAT_WEIGHTS,
+  pvp: PVP_ITEM_STAT_WEIGHTS,
 };
 /** Cada punto de DPS del arma a distancia: casi todo el daño de tus disparos sale de ahí. */
 export const RANGED_DPS_WEIGHT = 6;

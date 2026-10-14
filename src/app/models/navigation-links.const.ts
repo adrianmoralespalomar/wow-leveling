@@ -6,6 +6,7 @@ export const NAVIGATION_LINKS: NavigationLink[] = [
   { path: '/talentos', label: 'Talentos' },
   { path: '/mascotas', label: 'Mascotas' },
   { path: '/equipo', label: 'Equipo' },
+  { path: '/campos-de-batalla', label: 'Campos de batalla' },
   { path: '/addons', label: 'Addons' },
   { path: '/personaje', label: 'Mi personaje' },
 ];

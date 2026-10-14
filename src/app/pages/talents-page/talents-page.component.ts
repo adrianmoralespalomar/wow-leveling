@@ -49,7 +49,7 @@ export class TalentsPageComponent {
   );
 
   protected onBuildSelected(buildId: string): void {
-    this.playerProgress.talentBuildId.set(buildId);
+    this.playerProgress.setTalentBuildId(buildId);
   }
 
   protected onStepClicked(level: number): void {

@@ -2,8 +2,10 @@
   <div class="page-intro">
     <h1>Addons</h1>
     <p>
-      Lo que usa la gente para subir en Forever, con su estado a {{ addonsData()?.updatedAt }}. Los marcados como
-      esenciales son los que instalaría desde el primer día.
+      Lo que usa la gente en Forever para
+      {{ playerProgress.gameMode() === 'pvp' ? 'campos de batalla' : 'subir de nivel' }}, con su estado a
+      {{ addonsData()?.updatedAt }}. Los marcados como esenciales son los que instalaría desde el primer día. Cambia entre
+      PvE y PvP arriba para ver los de cada modo.
     </p>
   </div>
 

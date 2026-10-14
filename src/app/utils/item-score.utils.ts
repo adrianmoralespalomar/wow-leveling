@@ -1,6 +1,7 @@
+import { GameMode } from '../models/game-mode.type';
 import {
   AXE_SUBCLASSES,
-  ITEM_STAT_WEIGHTS,
+  ITEM_STAT_WEIGHTS_BY_GAME_MODE,
   MELEE_DPS_WEIGHT,
   ORC_AXE_BONUS,
   QUIVER_SPEED_WEIGHT,
@@ -20,9 +21,10 @@ export function getItemMinLevel(item: Item): number {
   return Math.max(1, item.itemLevel - 5);
 }
 
-export function scoreItem(item: Item): number {
+export function scoreItem(item: Item, gameMode: GameMode): number {
+  const statWeights = ITEM_STAT_WEIGHTS_BY_GAME_MODE[gameMode];
   const statsScore = Object.entries(item.stats).reduce(
-    (total, [statKey, value]) => total + (ITEM_STAT_WEIGHTS[statKey] ?? 0) * value,
+    (total, [statKey, value]) => total + (statWeights[statKey] ?? 0) * value,
     0,
   );
   if (item.slot === 'Ranged') return statsScore + (item.dps ?? 0) * RANGED_DPS_WEIGHT;

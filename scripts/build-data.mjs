@@ -20,6 +20,7 @@ import {
   readTalentsProps,
   TALENTS_URL,
 } from './data-sources.mjs';
+import { applyPvpVendorSource } from './pvp-sources.mjs';
 
 const OUTPUT_DIR = new URL('../public/data/', import.meta.url);
 const QUEST_LEVEL_MARGIN = 3;
@@ -149,7 +150,7 @@ async function buildItems() {
       dps: item.d ?? parseAmmoDps(tooltip),
       quiverSpeed: item.c === QUIVER_CLASS ? parseQuiverSpeed(tooltip) : null,
       stats: item.v ?? {},
-      source: buildSource(item.i, sources.items[item.i], questLookup),
+      source: applyPvpVendorSource(item.i, item.n, buildSource(item.i, sources.items[item.i], questLookup)),
     };
   });
   return { build: newItems.forever_build, buildDate: newItems.forever_build_date, items };

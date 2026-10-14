@@ -23,19 +23,12 @@ Plan:
 
 ## 2. Selector PvE / PvP
 
-Necesito saber qué talentos, equipo y addons llevar en campos de batalla, no solo para subir de nivel.
+Hecho (14 de octubre): selector en la cabecera (`STORAGE_KEYS.GAME_MODE`), build `mm-pvp` (31 MM / 20 SV, validada con `talents.json`), pesos de equipo por modo (`PVP_ITEM_STAT_WEIGHTS`), procedencia `pvp` para los vendedores de reputación y honor (`scripts/pvp-sources.mjs`), pestaña Campos de batalla con `pvp-guide.json` (campos, tramos con equipo de la Horda, combate, mascotas, reglas) y addons con `mode`. Cambian con el modo: Ahora (talento, tramo JcJ y pesos del equipo), Talentos, Equipo y Addons. Ruta y Mascotas se quedan igual.
 
-Idea:
+Queda:
 
-- [ ] Selector PvE / PvP siempre visible en la cabecera, junto al nivel. Guardado en `PlayerProgressService` (nueva clave `STORAGE_KEYS.GAME_MODE`).
-- [ ] Talentos: añadir `mode: 'pve' | 'pvp'` a `talent-builds.json` y builds PvP para Puntería (Scatter Shot, Improved Concussive Shot, Deterrence o Improved Wing Clip según el reparto). Validarlas con `talents.json` como las de PvE.
-- [ ] Equipo: pesos de stats por modo (en PvP sube Stamina) en `ITEM_STAT_WEIGHTS`, y fuentes PvP: recompensas de honor y de reputación de Warsong Gulch, Arathi Basin y Alterac Valley.
-- [ ] Tramos de BG (10-19, 20-29…): qué llevar en cada uno, incluido equipo de twink si compensa quedarse en un tramo.
-- [ ] Pestaña o sección "Campos de batalla": niveles de entrada, rotación y prioridades del cazador (control, kiting, Viper Sting contra casters, Tranquilizing Shot), y mascota recomendada para PvP.
-- [ ] Addons PvP en `addons.json` con etiqueta de modo (temporizadores de BG, enemigos, cooldowns de rivales). Comprobar cuáles hay para el cliente de Forever.
-- [ ] Ver qué pestañas cambian con el modo (Ahora, Talentos, Equipo, Addons, Mascotas) y cuáles se quedan igual (Ruta).
-
-Investigar antes:
-
-- [ ] Qué BG y qué sistema de honor y rangos trae Forever, y si cambia algo respecto a Classic.
-- [ ] Si la beta tiene BG hasta el 30 y si foreverchanges.pro lista el equipo de honor o de reputación PvP.
+- [ ] Revisar todo en el lanzamiento (4 de noviembre): en la beta solo se juega Darkspear Islands, así que tramos, recompensas y reglas salen de guías de fans.
+- [ ] Recompensas de Darkspear Raiders y de las marcas de honor: aún no están en los datos de foreverchanges.pro. Cuando salgan, añadirlas a los tramos.
+- [ ] Twinks: confirmar si Forever deja bloquear la experiencia y si los campos dan experiencia.
+- [ ] Probar la build JcJ y las mascotas recomendadas en partidas reales; quizá una segunda build JcJ de Bestias.
+- [ ] Comprobar si LoseControl tiene versión Forever y si hay temporizadores de campo de batalla compatibles.

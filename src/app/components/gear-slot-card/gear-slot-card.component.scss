@@ -27,6 +27,22 @@
     font-size: 0.875rem;
   }
 
+  .slot-wait {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    padding: 8px 10px;
+    border-left: 2px solid var(--accent);
+    border-radius: 4px;
+    background: var(--accent-soft);
+    font-size: 0.8125rem;
+    line-height: 1.4;
+
+    .slot-wait-name {
+      color: var(--quality-color);
+    }
+  }
+
   .slot-extra {
     display: flex;
     flex-wrap: wrap;

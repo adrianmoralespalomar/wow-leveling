@@ -6,6 +6,7 @@ import { ItemLinkComponent } from '../../components/item-link/item-link.componen
 import { MilestoneCardComponent } from '../../components/milestone-card/milestone-card.component';
 import { BeastLinkComponent } from '../../components/beast-link/beast-link.component';
 import { PetMilestoneCardComponent } from '../../components/pet-milestone-card/pet-milestone-card.component';
+import { PvpBracketCardComponent } from '../../components/pvp-bracket-card/pvp-bracket-card.component';
 import { TooltipDirective } from '../../components/tooltip/tooltip.directive';
 import { GEAR_SLOTS } from '../../models/gear-slots.const';
 import { FIRST_TALENT_LEVEL, MAX_LEVEL } from '../../models/level-limits.const';
@@ -14,6 +15,7 @@ import { GameDataService } from '../../services/game-data.service';
 import { GuideService } from '../../services/guide.service';
 import { PetGuideService } from '../../services/pet-guide.service';
 import { PlayerProgressService } from '../../services/player-progress.service';
+import { PvpGuideService } from '../../services/pvp-guide.service';
 import { TrainingService } from '../../services/training.service';
 import { toAbilityTooltip } from '../../utils/tooltip-content.utils';
 
@@ -30,6 +32,7 @@ const RANGED_SLOT = GEAR_SLOTS.find((gearSlot) => gearSlot.key === 'ranged')!;
     ItemLinkComponent,
     MilestoneCardComponent,
     PetMilestoneCardComponent,
+    PvpBracketCardComponent,
     RouterLink,
     TooltipDirective,
   ],
@@ -43,6 +46,7 @@ export class NowPageComponent {
   private readonly guideService = inject(GuideService);
   private readonly petGuide = inject(PetGuideService);
   protected readonly playerProgress = inject(PlayerProgressService);
+  private readonly pvpGuide = inject(PvpGuideService);
   private readonly trainingService = inject(TrainingService);
 
   protected readonly firstTalentLevel = FIRST_TALENT_LEVEL;
@@ -67,6 +71,9 @@ export class NowPageComponent {
 
   protected readonly currentMilestones = computed(() => this.guideService.getCurrentMilestones(this.level()));
   protected readonly nextMilestone = computed(() => this.guideService.getNextMilestone(this.level()));
+
+  protected readonly isPvpMode = computed(() => this.playerProgress.gameMode() === 'pvp');
+  protected readonly pvpBracket = computed(() => this.pvpGuide.getBracket(this.level()));
 
   protected readonly currentPetMilestone = computed(() => this.petGuide.getCurrentMilestone(this.level()));
   protected readonly nextPetMilestone = computed(() => this.petGuide.getNextMilestone(this.level()));

@@ -1,6 +1,9 @@
+import { GameMode } from './game-mode.type';
+
 export interface TalentBuild {
   id: string;
   name: string;
+  mode: GameMode;
   summary: string;
   verified: boolean;
   note: string;

@@ -1,0 +1,15 @@
+<fieldset class="mode-switch">
+  <legend class="visually-hidden">Modo de juego</legend>
+  @for (gameMode of gameModes; track gameMode) {
+    <label class="mode-option" [class.selected]="gameMode === playerProgress.gameMode()">
+      <input
+        type="radio"
+        name="game-mode"
+        class="visually-hidden"
+        [value]="gameMode"
+        [checked]="gameMode === playerProgress.gameMode()"
+        (change)="onGameModeSelected(gameMode)"/>
+      {{ gameModeLabels[gameMode] }}
+    </label>
+  }
+</fieldset>

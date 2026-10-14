@@ -9,7 +9,7 @@
 
   <fieldset class="build-picker">
     <legend class="visually-hidden">Build</legend>
-    @for (option of gameData.talentBuilds(); track option.id) {
+    @for (option of playerProgress.talentBuildsForMode(); track option.id) {
       <label class="build-option" [class.selected]="option.id === build()?.id">
         <input
           type="radio"

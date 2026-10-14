@@ -1,0 +1,76 @@
+:host {
+  display: grid;
+  gap: 14px;
+  min-width: 0;
+  padding: 18px 20px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: var(--surface);
+
+  &.current {
+    border-color: var(--accent);
+  }
+
+  .bracket-header {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 6px 12px;
+  }
+
+  .bracket-range {
+    font-size: 1.75rem;
+    font-weight: 800;
+    font-variant-numeric: lining-nums;
+  }
+
+  .bracket-battlegrounds {
+    font-size: 0.9375rem;
+  }
+
+  .bracket-summary {
+    max-width: 75ch;
+  }
+
+  .bracket-body {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr));
+    gap: 20px 32px;
+  }
+
+  .bracket-column {
+    display: grid;
+    align-content: start;
+    gap: 10px;
+    min-width: 0;
+
+    .column-title {
+      margin: 0;
+      color: var(--text-muted);
+      font-family: var(--font-ui);
+      font-size: 0.875rem;
+      font-weight: 500;
+    }
+  }
+
+  .priority-list {
+    display: grid;
+    gap: 6px;
+    margin: 0;
+    padding-left: 18px;
+    font-size: 0.9375rem;
+  }
+
+  .bracket-items {
+    display: grid;
+    gap: 8px;
+  }
+
+  .bracket-twink {
+    padding: 8px 12px;
+    border-left: 2px solid var(--accent);
+    border-radius: 4px;
+    background: var(--accent-soft);
+    font-size: 0.875rem;
+  }
+}

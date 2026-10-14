@@ -9,6 +9,7 @@ import { LevelingGuide } from '../models/leveling-guide.interface';
 import { PetAbilitiesData } from '../models/pet-abilities-data.interface';
 import { PetGuide } from '../models/pet-guide.interface';
 import { PetsData } from '../models/pets-data.interface';
+import { PvpGuide } from '../models/pvp-guide.interface';
 import { Talent } from '../models/talent.interface';
 import { TalentBuildsData } from '../models/talent-builds-data.interface';
 import { TalentsData } from '../models/talents-data.interface';
@@ -27,6 +28,7 @@ export class GameDataService {
   private readonly petAbilitiesResource = httpResource<PetAbilitiesData>(() => this.toDataUrl('pet-abilities.json'));
   private readonly petGuideResource = httpResource<PetGuide>(() => this.toDataUrl('pet-guide.json'));
   private readonly petsResource = httpResource<PetsData>(() => this.toDataUrl('pets.json'));
+  private readonly pvpGuideResource = httpResource<PvpGuide>(() => this.toDataUrl('pvp-guide.json'));
   private readonly talentBuildsResource = httpResource<TalentBuildsData>(() => this.toDataUrl('talent-builds.json'));
   private readonly talentsResource = httpResource<TalentsData>(() => this.toDataUrl('talents.json'));
 
@@ -39,6 +41,7 @@ export class GameDataService {
   readonly petAbilities = computed(() => this.petAbilitiesResource.value()?.abilities ?? []);
   readonly petGuide = computed(() => this.petGuideResource.value() ?? null);
   readonly petFamilies = computed(() => this.petsResource.value()?.families ?? []);
+  readonly pvpGuide = computed(() => this.pvpGuideResource.value() ?? null);
   readonly tameableBeasts = computed(() => this.petsResource.value()?.beasts ?? []);
   readonly talentBuilds = computed(() => this.talentBuildsResource.value()?.builds ?? []);
   readonly talentTrees = computed(() => this.talentsResource.value()?.trees ?? []);
@@ -59,6 +62,7 @@ export class GameDataService {
       this.petAbilitiesResource,
       this.petGuideResource,
       this.petsResource,
+      this.pvpGuideResource,
       this.talentBuildsResource,
       this.talentsResource,
     ].some((resource) => resource.error() !== undefined),

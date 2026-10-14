@@ -8,5 +8,6 @@ export const ITEM_SOURCE_KIND_LABELS: Record<ItemSourceKind, string> = {
   world: 'Botín aleatorio',
   dungeon: 'Mazmorra',
   rare: 'Élite raro',
+  pvp: 'Campo de batalla',
   other: 'Otro',
 };

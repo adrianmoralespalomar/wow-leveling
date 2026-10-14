@@ -41,12 +41,44 @@
     margin-top: 4px;
   }
 
+  .milestone-advice {
+    max-width: 62ch;
+    padding: 8px 12px;
+    border-left: 2px solid var(--accent);
+    border-radius: 4px;
+    background: var(--accent-soft);
+    font-size: 0.875rem;
+  }
+
   .milestone-alternatives {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
+    display: grid;
     gap: 6px;
     font-size: 0.8125rem;
+
+    .milestone-alternatives-title {
+      color: var(--text-muted);
+    }
+
+    .milestone-alternative-list {
+      display: grid;
+      gap: 6px;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .milestone-alternative {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      min-width: 0;
+
+      .chip {
+        flex-shrink: 0;
+        min-width: 7.5em;
+        justify-content: center;
+      }
+    }
   }
 }
 

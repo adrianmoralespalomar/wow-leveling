@@ -1,13 +1,16 @@
 import { ChangeDetectionStrategy, Component, computed, inject, input } from '@angular/core';
+import { ACQUISITION_ROUTE_LABELS } from '../../models/acquisition-route-labels.const';
 import { GearSlot } from '../../models/gear-slot.interface';
 import { ScoredItem } from '../../models/scored-item.interface';
+import { WAIT_ADVICE_REASONS } from '../../models/wait-advice-reasons.const';
+import { getAcquisitionRoute } from '../../utils/acquisition-route.utils';
 import { GearAdvisorService } from '../../services/gear-advisor.service';
-import { describeItemBriefly } from '../../utils/item-description.utils';
+import { describeItemBriefly, describeItemSource } from '../../utils/item-description.utils';
 import { ItemLinkComponent } from '../item-link/item-link.component';
 
 const MIN_UPGRADE_SCORE_GAIN = 0.5;
 
-/** Mejor objeto para una ranura a tu nivel, alternativas y la próxima mejora. */
+/** Mejor objeto para una ranura a tu nivel, cómo cubrirla por otras vías, si conviene esperar y la próxima mejora. */
 @Component({
   selector: 'app-gear-slot-card',
   imports: [ItemLinkComponent],
@@ -23,11 +26,21 @@ export class GearSlotCardComponent {
   /** Lo que lleva el personaje importado en esta ranura (vacío si no se ha importado). */
   readonly equippedItems = input<ScoredItem[]>([]);
 
-  protected readonly recommendations = computed(() =>
-    this.gearAdvisor.getRecommendations(this.gearSlot().key, this.level()),
+  protected readonly bestItem = computed(
+    () => this.gearAdvisor.getRecommendations(this.gearSlot().key, this.level(), 1)[0] ?? null,
   );
-  protected readonly bestItem = computed(() => this.recommendations()[0] ?? null);
-  protected readonly alternatives = computed(() => this.recommendations().slice(1));
+  protected readonly bestItemRoute = computed(() => {
+    const best = this.bestItem();
+    return best ? getAcquisitionRoute(best.item) : null;
+  });
+  protected readonly routeAlternatives = computed(() =>
+    this.gearAdvisor.getRouteAlternatives(this.gearSlot().key, this.level()),
+  );
+  protected readonly waitAdvice = computed(() => this.gearAdvisor.getWaitAdvice(this.gearSlot().key, this.level()));
+  protected readonly waitAdviceReason = computed(() => {
+    const route = this.bestItemRoute();
+    return (route && WAIT_ADVICE_REASONS[route]) ?? 'No hace falta buscar esta pieza';
+  });
   protected readonly upcomingUpgrade = computed(
     () => this.gearAdvisor.getUpcomingUpgrades(this.gearSlot().key, this.level(), 1)[0] ?? null,
   );
@@ -43,4 +56,6 @@ export class GearSlotCardComponent {
   });
 
   protected readonly describeItemBriefly = describeItemBriefly;
+  protected readonly describeItemSource = describeItemSource;
+  protected readonly routeLabels = ACQUISITION_ROUTE_LABELS;
 }

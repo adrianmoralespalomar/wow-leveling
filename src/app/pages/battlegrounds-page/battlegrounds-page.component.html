@@ -1,0 +1,119 @@
+<div class="page">
+  <div class="page-intro">
+    <h1>Campos de batalla</h1>
+    <p>
+      Qué campos tienes a tu nivel, cómo se juega el cazador en cada tramo y qué equipo de reputación y honor puede
+      conseguir la Horda.
+      @if (playerProgress.gameMode() === 'pve') {
+        Pasa a
+        <button type="button" class="inline-button" (click)="onPvpModeButtonClicked()">modo PvP</button>
+        para ver la build, el equipo y los addons de campos de batalla en el resto de pestañas.
+      } @else {
+        Estás en modo PvP: <a routerLink="/talentos">Talentos</a>, <a routerLink="/equipo">Equipo</a> y
+        <a routerLink="/addons">Addons</a> ya muestran lo de campos de batalla.
+      }
+    </p>
+  </div>
+
+  @if (guide(); as pvpGuide) {
+    <p class="notice">{{ pvpGuide.note }}</p>
+
+    <section class="battleground-section">
+      <h2>Los cuatro campos</h2>
+      <ul class="battleground-list">
+        @for (battleground of pvpGuide.battlegrounds; track battleground.name) {
+          <li class="battleground" [class.open]="isOpenAtLevel(battleground)">
+            <div class="battleground-head">
+              <h3>{{ battleground.name }}</h3>
+              @if (battleground.isNew) {
+                <span class="chip chip-accent">Nuevo</span>
+              }
+              @if (battleground.isPlayableInBeta) {
+                <span class="chip">En la beta</span>
+              }
+            </div>
+            <p class="muted">
+              Niveles {{ battleground.minLevel }}-{{ battleground.maxLevel }}, {{ battleground.teamSize }}.
+              {{ isOpenAtLevel(battleground) ? 'Abierto a tu nivel.' : 'Abre al ' + battleground.minLevel + '.' }}
+            </p>
+            <p>{{ battleground.objective }}</p>
+            <dl class="battleground-facts">
+              <dt>Reputación</dt>
+              <dd>{{ battleground.hordeReputation }}</dd>
+              <dt>Sus marcas</dt>
+              <dd>{{ battleground.markSlots }}</dd>
+            </dl>
+            <p class="muted battleground-note">{{ battleground.note }}</p>
+          </li>
+        }
+      </ul>
+    </section>
+
+    <section class="bracket-section">
+      <h2>Tramos</h2>
+      @if (currentBracket(); as current) {
+        <app-pvp-bracket-card [view]="current" [isCurrent]="true"/>
+      } @else {
+        <p class="muted">Los campos de batalla abren al nivel 10 con Warsong Gulch.</p>
+      }
+      @for (view of otherBrackets(); track view.bracket.minLevel) {
+        <app-pvp-bracket-card [view]="view"/>
+      }
+    </section>
+
+    <section class="panel">
+      <h2 class="panel-title">Cómo se juega el cazador</h2>
+      <ul class="tip-list">
+        @for (tip of pvpGuide.combatTips; track tip.title) {
+          <li class="tip">
+            <h3>{{ tip.title }}</h3>
+            <p class="muted">{{ tip.description }}</p>
+          </li>
+        }
+      </ul>
+    </section>
+
+    <section class="panel">
+      <h2 class="panel-title">Mascota para campos de batalla</h2>
+      <p class="muted pet-intro">
+        Con la build JcJ (sin Lone Wolf) la mascota sirve para molestar y pelar: importa la habilidad propia de la familia
+        más que su daño. Propuesta sin probar en Forever.
+      </p>
+      <ul class="pet-list">
+        @for (petPick of petPicks(); track petPick.pick.familyId) {
+          <li class="pet">
+            @if (petPick.family) {
+              <app-game-icon [icon]="petPick.family.icon" size="large"/>
+            }
+            <div class="pet-text">
+              <p class="pet-name">
+                {{ petPick.family?.name ?? 'Familia ' + petPick.pick.familyId }}
+                @if (petPick.ability) {
+                  <span class="muted">{{ petPick.ability }}</span>
+                }
+              </p>
+              <p class="muted">{{ petPick.pick.reason }}</p>
+            </div>
+          </li>
+        }
+      </ul>
+      <a routerLink="/mascotas">Dónde domarlas y qué habilidades aprenden</a>
+    </section>
+
+    <section class="panel">
+      <h2 class="panel-title">Cómo funciona el JcJ en Forever</h2>
+      <ul class="rule-list">
+        @for (rule of pvpGuide.rules; track $index) {
+          <li>{{ rule }}</li>
+        }
+      </ul>
+    </section>
+
+    <p class="muted source-note">
+      Datos a {{ pvpGuide.updatedAt }}. Fuentes:
+      @for (source of pvpGuide.sources; track source.url; let isLast = $last) {
+        <a [href]="source.url" target="_blank" rel="noopener">{{ source.label }}</a>{{ isLast ? '.' : ',' }}
+      }
+    </p>
+  }
+</div>

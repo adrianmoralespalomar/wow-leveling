@@ -11,14 +11,23 @@
   <p class="slot-empty">Nada recomendable todavía a este nivel.</p>
 }
 
-@if (alternatives().length || upcomingUpgrade()) {
+@if (waitAdvice(); as advice) {
+  <p class="slot-wait">
+    <app-item-link [item]="advice.scoredItem.item" [showName]="false" iconSize="small"/>
+    <span>
+      {{ waitAdviceReason() }}: al {{ advice.scoredItem.minLevel }},
+      <span [attr.data-quality]="advice.scoredItem.item.quality" class="slot-wait-name">{{ advice.scoredItem.item.name }}</span>
+      ({{ describeItemSource(advice.scoredItem.item) }}) iguala o supera lo de ahora.
+    </span>
+  </p>
+}
+
+@if (routeAlternatives().length || upcomingUpgrade()) {
   <div class="slot-extra">
-    @if (alternatives().length) {
+    @for (option of routeAlternatives(); track option.route) {
       <span class="slot-extra-group">
-        <span class="slot-extra-label">Alternativas</span>
-        @for (alternative of alternatives(); track alternative.item.id) {
-          <app-item-link [item]="alternative.item" [showName]="false" iconSize="small"/>
-        }
+        <span class="slot-extra-label">{{ routeLabels[option.route] }}</span>
+        <app-item-link [item]="option.scoredItem.item" [showName]="false" iconSize="small"/>
       </span>
     }
     @if (upcomingUpgrade(); as upgrade) {

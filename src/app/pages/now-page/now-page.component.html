@@ -81,6 +81,20 @@
     </article>
   </section>
 
+  @if (isPvpMode()) {
+    <section class="pvp-section">
+      <div class="pvp-heading">
+        <h2>Campos de batalla a tu nivel</h2>
+        <a routerLink="/campos-de-batalla">Ver todos los tramos y cómo se juega</a>
+      </div>
+      @if (pvpBracket(); as bracket) {
+        <app-pvp-bracket-card [view]="bracket" [isCurrent]="true"/>
+      } @else {
+        <p class="muted">Los campos de batalla abren al nivel 10 con Warsong Gulch.</p>
+      }
+    </section>
+  }
+
   <section class="panel pet-panel">
     <div class="pet-heading">
       <h2 class="panel-title">Mascota</h2>
@@ -186,8 +200,13 @@
       </label>
     </div>
     <p class="muted gear-note">
-      Ordenado por una puntuación orientativa para Puntería: Agilidad, poder de ataque y el DPS del arma pesan más. Solo
-      objetos que la Horda puede conseguir.
+      @if (isPvpMode()) {
+        Ordenado para campos de batalla: el Aguante pesa casi tanto como la Agilidad y el DPS del arma.
+      } @else {
+        Ordenado por una puntuación orientativa para Puntería: Agilidad, poder de ataque y el DPS del arma pesan más.
+      }
+      Solo objetos que la Horda puede conseguir. Debajo de cada pieza, otras vías para cubrir la ranura y si conviene
+      esperar a una misión cercana.
       @if (!hasCharacter()) {
         <a routerLink="/personaje">Importa tu personaje</a> para ver qué ranuras puedes mejorar.
       }

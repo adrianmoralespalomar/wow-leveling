@@ -10,7 +10,6 @@ import { GameDataService } from '../../services/game-data.service';
 import { GearAdvisorService } from '../../services/gear-advisor.service';
 import { PlayerProgressService } from '../../services/player-progress.service';
 import { formatDecimal } from '../../utils/item-description.utils';
-import { scoreItem } from '../../utils/item-score.utils';
 import { getTalentRanksAtLevel } from '../../utils/talent-build.utils';
 
 const MIN_UPGRADE_SCORE_GAIN = 0.5;
@@ -61,7 +60,7 @@ export class CharacterPageComponent {
       const equipped = character.equipment.find((equippedItem) => equippedItem.slotId === slot.inventoryId) ?? null;
       const item = equipped ? itemsById.get(equipped.itemId) : undefined;
       const best = slot.gearSlotKey ? this.gearAdvisor.getRecommendations(slot.gearSlotKey, character.level, 1)[0] : undefined;
-      const equippedScore = item ? scoreItem(item) : 0;
+      const equippedScore = item ? this.gearAdvisor.toScoredItem(item).score : 0;
       const isUpgrade = !!best && best.item.id !== item?.id && best.score - equippedScore > MIN_UPGRADE_SCORE_GAIN;
       return { slot, equipped, item, upgrade: isUpgrade && best ? best : null };
     });
