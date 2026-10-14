@@ -1,0 +1,171 @@
+.nearby-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 12px 20px;
+}
+
+.nearby-note {
+  margin-top: 12px;
+  font-size: 0.875rem;
+}
+
+.abilities-panel {
+  display: grid;
+  gap: 12px;
+
+  .panel-title {
+    margin-bottom: 0;
+  }
+}
+
+.abilities-heading {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px 16px;
+}
+
+.family-picker {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--text-muted);
+  font-size: 0.9375rem;
+}
+
+.abilities-note {
+  max-width: 85ch;
+  font-size: 0.9375rem;
+}
+
+.table-scroll {
+  overflow-x: auto;
+}
+
+.abilities-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9375rem;
+
+  th {
+    padding: 8px 10px;
+    border-bottom: 1px solid var(--line-strong);
+    color: var(--text-muted);
+    font-size: 0.8125rem;
+    font-weight: 500;
+    text-align: left;
+  }
+
+  td {
+    padding: 6px 10px;
+    border-bottom: 1px solid var(--line);
+    vertical-align: middle;
+  }
+
+  .locked {
+    opacity: 0.55;
+  }
+
+  .column-number {
+    width: 1%;
+    font-variant-numeric: tabular-nums;
+    text-align: right;
+    white-space: nowrap;
+  }
+
+  .ability-name {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 0;
+    border: 0;
+    background: none;
+    font-weight: 600;
+    white-space: nowrap;
+    cursor: help;
+  }
+
+  .teachers {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px 16px;
+  }
+
+  .next-rank {
+    font-size: 0.8125rem;
+    white-space: nowrap;
+  }
+}
+
+.timeline {
+  display: grid;
+  gap: 18px;
+
+  app-pet-milestone-card {
+    padding: 14px 16px;
+    border: 1px solid transparent;
+    border-radius: 10px;
+
+    &.current {
+      border-color: var(--xp-fill);
+      background: var(--surface);
+    }
+  }
+}
+
+.families {
+  display: grid;
+  gap: 14px;
+}
+
+.family-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 12px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.family {
+  display: grid;
+  align-content: start;
+  justify-items: start;
+  gap: 8px;
+  padding: 14px 16px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: var(--surface);
+  font-size: 0.9375rem;
+
+  &.recommended {
+    border-color: var(--line-strong);
+    background: var(--surface-raised);
+  }
+}
+
+.family-head {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.family-title {
+  display: grid;
+  font-size: 0.875rem;
+}
+
+.rules {
+  display: grid;
+  gap: 12px;
+  max-width: 80ch;
+}
+
+.rule-list {
+  display: grid;
+  gap: 6px;
+  margin: 0;
+  padding-left: 1.2em;
+  color: var(--text-muted);
+}

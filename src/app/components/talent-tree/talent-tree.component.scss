@@ -1,0 +1,89 @@
+:host {
+  display: grid;
+  gap: 12px;
+  padding: 14px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: var(--surface);
+
+  .tree-header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .tree-name {
+    flex: 1;
+  }
+
+  .tree-points {
+    color: var(--accent);
+    font-family: var(--font-display);
+    font-size: 1.5rem;
+    font-weight: 800;
+    font-variant-numeric: lining-nums;
+  }
+
+  .tree-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 44px);
+    grid-template-rows: repeat(7, 52px);
+    justify-content: space-between;
+  }
+
+  .talent {
+    position: relative;
+    align-self: start;
+    width: 44px;
+    padding: 0;
+    border: 0;
+    background: none;
+    cursor: help;
+
+    app-game-icon {
+      --icon-size: 40px;
+      filter: grayscale(1) brightness(0.55);
+    }
+  }
+
+  .talent-rank {
+    position: absolute;
+    right: -4px;
+    bottom: -6px;
+    padding: 0 4px;
+    border: 1px solid var(--line-strong);
+    border-radius: 4px;
+    background: var(--surface-sunken);
+    color: var(--text-muted);
+    font-size: 0.6875rem;
+    font-variant-numeric: tabular-nums;
+    line-height: 1.4;
+  }
+
+  // Talentos que la build usará más adelante
+  .planned app-game-icon {
+    filter: grayscale(0.6) brightness(0.8);
+    outline: 1px dashed var(--line-strong);
+  }
+
+  .partial,
+  .maxed {
+    app-game-icon {
+      filter: none;
+    }
+  }
+
+  .partial .talent-rank {
+    border-color: var(--xp-fill);
+    color: var(--xp-fill);
+  }
+
+  .maxed .talent-rank {
+    border-color: var(--accent);
+    color: var(--accent);
+  }
+
+  .current app-game-icon {
+    box-shadow: 0 0 0 2px var(--background), 0 0 0 4px var(--accent);
+  }
+}

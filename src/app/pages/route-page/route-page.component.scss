@@ -1,0 +1,169 @@
+.bracket {
+  display: grid;
+  gap: 16px;
+  padding: 20px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: var(--surface);
+
+  &.current {
+    border-color: var(--accent);
+  }
+}
+
+.bracket-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.bracket-range {
+  font-size: 2rem;
+  font-weight: 800;
+  font-variant-numeric: lining-nums;
+}
+
+.bracket-body {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 24px 32px;
+}
+
+.bracket-column {
+  display: grid;
+  align-content: start;
+  gap: 12px;
+}
+
+.column-title {
+  color: var(--text-muted);
+  font-family: var(--font-ui);
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
+.range-list,
+.dungeon-list {
+  display: grid;
+  gap: 6px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.range-row {
+  display: grid;
+  grid-template-columns: minmax(0, 13rem) 1fr 3.5rem;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.9375rem;
+}
+
+.range-name {
+  display: grid;
+  min-width: 0;
+  line-height: 1.25;
+  // Nombre en inglés y, debajo, el español
+  > * {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+}
+
+.range-spanish-name {
+  color: var(--text-muted);
+  font-size: 0.8125rem;
+  font-style: italic;
+}
+
+// Barra 1-60 con el tramo de niveles de la zona
+.range-bar {
+  position: relative;
+  height: 6px;
+  border-radius: 3px;
+  background: var(--surface-sunken);
+}
+
+.range-fill {
+  position: absolute;
+  inset: 0 auto 0 calc(var(--start) * 100%);
+  width: calc(var(--width) * 100%);
+  border-radius: 3px;
+  background: var(--xp-fill);
+  opacity: 0.8;
+}
+
+.range-levels {
+  color: var(--text-muted);
+  font-size: 0.8125rem;
+  font-variant-numeric: tabular-nums;
+  text-align: right;
+}
+
+.dungeon {
+  display: grid;
+  gap: 4px;
+  padding: 10px 0;
+  border-top: 1px solid var(--line);
+
+  &.unavailable {
+    opacity: 0.55;
+  }
+}
+
+.dungeon-head {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  .range-levels {
+    margin-left: auto;
+  }
+}
+
+.dungeon-name {
+  font-weight: 700;
+}
+
+.dungeon-zone {
+  font-size: 0.875rem;
+}
+
+.dungeon-loot {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  font-size: 0.8125rem;
+}
+
+.milestones {
+  gap: 20px;
+}
+
+.tips {
+  display: grid;
+  gap: 14px;
+}
+
+.tip-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 16px 24px;
+}
+
+.tip {
+  display: grid;
+  gap: 4px;
+  font-size: 0.9375rem;
+}
+
+@media (max-width: 800px) {
+  .bracket {
+    padding: 16px;
+  }
+
+  .bracket-body {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}

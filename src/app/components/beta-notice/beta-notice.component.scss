@@ -1,0 +1,142 @@
+:host {
+  display: contents;
+}
+
+.beta-button {
+  display: inline-flex;
+  flex: none;
+  align-items: center;
+  gap: 8px;
+  padding: 5px 12px;
+  border: 1px solid var(--warning);
+  border-radius: 999px;
+  background: rgb(230 161 92 / 10%);
+  color: var(--warning);
+  font-size: 0.8125rem;
+  font-weight: 700;
+  white-space: nowrap;
+  cursor: pointer;
+
+  &:hover {
+    background: rgb(230 161 92 / 20%);
+  }
+
+  .beta-dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--warning);
+  }
+
+  .beta-label-short {
+    display: none;
+  }
+}
+
+.beta-dialog {
+  width: min(560px, calc(100vw - 32px));
+  max-height: calc(100dvh - 32px);
+  padding: 0;
+  border: 1px solid var(--line-strong);
+  border-radius: 12px;
+  background: var(--surface);
+  color: var(--text);
+
+  &::backdrop {
+    background: rgb(5 10 8 / 70%);
+  }
+
+  .dialog-content {
+    position: relative;
+    display: grid;
+    gap: 16px;
+    padding: 22px 24px 24px;
+  }
+
+  h2 {
+    padding-right: 32px;
+  }
+
+  .dialog-list {
+    display: grid;
+    gap: 8px;
+    margin: 0;
+    padding-left: 1.2em;
+    font-size: 0.9375rem;
+  }
+
+  .dialog-status {
+    display: grid;
+    gap: 6px;
+    padding: 12px 14px;
+    border-radius: 8px;
+    background: var(--surface-sunken);
+    font-size: 0.9375rem;
+  }
+
+  .dialog-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  .dialog-button {
+    padding: 8px 14px;
+    border: 1px solid var(--accent);
+    border-radius: 8px;
+    background: transparent;
+    color: var(--accent);
+    font-weight: 700;
+    cursor: pointer;
+
+    &.primary {
+      background: var(--accent);
+      color: var(--background);
+    }
+
+    &:disabled {
+      opacity: 0.5;
+      cursor: progress;
+    }
+  }
+
+  .dialog-message {
+    font-size: 0.9375rem;
+
+    &.warning {
+      color: var(--warning);
+    }
+  }
+
+  .dialog-close {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    width: 32px;
+    height: 32px;
+    border: 0;
+    border-radius: 50%;
+    background: transparent;
+    color: var(--text-muted);
+    font-size: 1.5rem;
+    line-height: 1;
+    cursor: pointer;
+
+    &:hover {
+      background: var(--surface-raised);
+      color: var(--text);
+    }
+  }
+}
+
+@media (max-width: 640px) {
+  .beta-button {
+    .beta-label-long {
+      display: none;
+    }
+
+    .beta-label-short {
+      display: inline;
+    }
+  }
+}

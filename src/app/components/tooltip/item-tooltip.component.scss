@@ -1,0 +1,40 @@
+:host {
+  display: block;
+  color: var(--tooltip-text);
+
+  p {
+    margin: 0;
+  }
+
+  .item-name {
+    margin-bottom: 2px;
+    color: var(--quality-color, var(--tooltip-text));
+    font-size: 1rem;
+    font-weight: 600;
+  }
+
+  .item-line {
+    display: flex;
+    justify-content: space-between;
+    gap: 24px;
+  }
+
+  .item-effect {
+    color: var(--tooltip-effect);
+  }
+
+  .item-meta {
+    margin-top: 6px;
+    color: var(--tooltip-highlight);
+  }
+
+  .item-source {
+    color: var(--tooltip-muted);
+  }
+
+  .item-status {
+    margin-top: 4px;
+    color: var(--accent);
+    font-size: 0.8125rem;
+  }
+}

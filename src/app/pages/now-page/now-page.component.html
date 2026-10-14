@@ -1,0 +1,208 @@
+<div class="page">
+  <section class="now-grid">
+    <article class="panel level-panel">
+      <h2 class="panel-title">Al llegar al {{ level() }}</h2>
+
+      <div class="level-block">
+        <h3 class="block-title">Talento</h3>
+        @if (talentStep(); as step) {
+          <button type="button" class="talent-step" [appTooltip]="step.tooltip">
+            <app-game-icon [icon]="step.talent.icon" size="large"/>
+            <span class="talent-step-text">
+              <span class="talent-step-name">{{ step.talent.name }}</span>
+              <span class="muted">{{ step.treeName }}, rango {{ step.rank }}/{{ step.talent.maxRank }}</span>
+            </span>
+          </button>
+        } @else if (level() < firstTalentLevel) {
+          <p class="muted">Los talentos empiezan al nivel {{ firstTalentLevel }}.</p>
+        } @else {
+          <p class="muted">Esta build no tiene punto para este nivel.</p>
+        }
+        @if (nextTalentStep(); as next) {
+          <p class="next-line">
+            Al {{ next.level }}:
+            <button type="button" class="inline-spell" [appTooltip]="next.tooltip">
+              <app-game-icon [icon]="next.talent.icon" size="small"/>
+              {{ next.talent.name }} {{ next.rank }}/{{ next.talent.maxRank }}
+            </button>
+          </p>
+        }
+        <a class="block-link" routerLink="/talentos">Ver la build completa</a>
+      </div>
+
+      <div class="level-block">
+        <h3 class="block-title">Instructor</h3>
+        @if (abilitiesNow().length) {
+          <ul class="ability-list">
+            @for (entry of abilitiesNow(); track $index) {
+              <li>
+                <button type="button" class="inline-spell" [appTooltip]="entry.tooltip">
+                  <app-game-icon [icon]="entry.ability.icon" size="small"/>
+                  {{ entry.ability.name }}
+                  @if (entry.ability.rank) {
+                    <span class="muted">rango {{ entry.ability.rank }}</span>
+                  }
+                  @if (entry.ability.status === 'new') {
+                    <span class="chip chip-accent">Nuevo</span>
+                  }
+                </button>
+              </li>
+            }
+          </ul>
+        } @else {
+          <p class="muted">En este nivel no hay nada nuevo que entrenar.</p>
+        }
+        @if (nextTrainingLevel(); as nextLevel) {
+          <p class="next-line">
+            Al {{ nextLevel }}:
+            @for (entry of abilitiesNext(); track $index) {
+              <button type="button" class="inline-spell" [appTooltip]="entry.tooltip" [attr.aria-label]="entry.ability.name">
+                <app-game-icon [icon]="entry.ability.icon" size="small"/>
+              </button>
+            }
+          </p>
+        }
+      </div>
+    </article>
+
+    <article class="panel weapon-panel">
+      <h2 class="panel-title">Arma a distancia</h2>
+      @for (view of currentMilestones(); track view.milestone.title) {
+        <app-milestone-card [view]="view"/>
+      }
+      @if (nextMilestone(); as next) {
+        <app-milestone-card [view]="next" [isUpcoming]="true"/>
+      }
+      <app-gear-slot-card
+        class="weapon-best"
+        [gearSlot]="rangedSlot"
+        [level]="level()"
+        [equippedItems]="equippedItemsBySlot().get('ranged') ?? []"/>
+    </article>
+  </section>
+
+  <section class="panel pet-panel">
+    <div class="pet-heading">
+      <h2 class="panel-title">Mascota</h2>
+      @if (characterPet(); as pet) {
+        <span class="muted">Llevas un {{ pet.family }} de nivel {{ pet.level }}</span>
+      }
+    </div>
+    <div class="pet-columns">
+      <div class="pet-milestones">
+        @if (currentPetMilestone(); as current) {
+          <app-pet-milestone-card [view]="current"/>
+        }
+        @if (nextPetMilestone(); as next) {
+          <app-pet-milestone-card [view]="next" [isUpcoming]="true"/>
+        }
+      </div>
+      <div class="pet-nearby">
+        <h3 class="block-title">Para domar a tu nivel</h3>
+        @for (beast of nearbyBeasts(); track beast.beast.id) {
+          <app-beast-link [view]="beast"/>
+        } @empty {
+          <p class="muted">Tu primera mascota llega al 10 con Taming the Beast.</p>
+        }
+        @if (petAbilityUnlock(); as unlock) {
+          <h3 class="block-title">
+            {{ unlock.level === level() ? 'Habilidades nuevas ahora' : 'Próximas habilidades, al ' + unlock.level }}
+            ({{ playerProgress.petFamilyName() }})
+          </h3>
+          <div class="pet-unlocks">
+            @for (entry of unlock.entries; track entry.ability.name) {
+              <button type="button" class="inline-spell" [appTooltip]="entry.tooltip">
+                @if (entry.ability.icon) {
+                  <app-game-icon [icon]="entry.ability.icon" size="small"/>
+                }
+                {{ entry.ability.name }} {{ entry.currentRank?.rank }}
+              </button>
+            }
+          </div>
+        }
+        <a class="block-link" routerLink="/mascotas">Ver habilidades, familias y todas las mascotas</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="panel where-panel">
+    <h2 class="panel-title">Dónde subir</h2>
+    <div class="zone-list">
+      @for (zone of zones(); track zone.name) {
+        <div class="zone">
+          <p class="zone-name">
+            {{ zone.name }}
+            <span class="muted">{{ zone.minLevel }}-{{ zone.maxLevel }}</span>
+          </p>
+          @if (zone.spanishName !== zone.name) {
+            <p class="zone-spanish-name">{{ zone.spanishName }}</p>
+          }
+          <p class="muted">{{ zone.note }}</p>
+        </div>
+      } @empty {
+        <p class="muted">No hay zonas registradas para este nivel.</p>
+      }
+    </div>
+
+    @if (dungeons().length) {
+      <h3 class="dungeon-heading">Mazmorras a tu alcance</h3>
+      <ul class="dungeon-list">
+        @for (entry of dungeons(); track entry.dungeon.name) {
+          <li class="dungeon">
+            <div class="dungeon-info">
+              <p class="dungeon-name">
+                {{ entry.dungeon.name }}
+                @if (entry.dungeon.isNew) {
+                  <span class="chip chip-accent">Nueva</span>
+                }
+              </p>
+              <p class="muted">
+                {{ entry.dungeon.zone }}{{ entry.dungeon.zoneSpanishName !== entry.dungeon.zone ? ' (' + entry.dungeon.zoneSpanishName + ')' : '' }},
+                niveles {{ entry.dungeon.minLevel }}-{{ entry.dungeon.maxLevel }}
+              </p>
+              @if (entry.dungeon.note) {
+                <p class="muted">{{ entry.dungeon.note }}</p>
+              }
+            </div>
+            <div class="dungeon-loot">
+              @for (loot of entry.loot; track loot.item.id) {
+                <app-item-link [item]="loot.item" [showName]="false"/>
+              } @empty {
+                <span class="muted">Botín aún oculto en la beta</span>
+              }
+            </div>
+          </li>
+        }
+      </ul>
+    }
+  </section>
+
+  <section class="gear-section">
+    <div class="gear-heading">
+      <h2>Equipo para tu nivel</h2>
+      <label class="toggle">
+        <input type="checkbox" [checked]="playerProgress.includeRandomDrops()" (change)="onRandomDropsToggled($event)"/>
+        Incluir botín aleatorio de la subasta
+      </label>
+    </div>
+    <p class="muted gear-note">
+      Ordenado por una puntuación orientativa para Puntería: Agilidad, poder de ataque y el DPS del arma pesan más. Solo
+      objetos que la Horda puede conseguir.
+      @if (!hasCharacter()) {
+        <a routerLink="/personaje">Importa tu personaje</a> para ver qué ranuras puedes mejorar.
+      }
+    </p>
+    @if (isLoadingItems()) {
+      <p class="muted">Cargando objetos…</p>
+    } @else {
+      <div class="gear-grid">
+        @for (gearSlot of otherGearSlots; track gearSlot.key) {
+          <app-gear-slot-card
+            [gearSlot]="gearSlot"
+            [level]="level()"
+            [equippedItems]="equippedItemsBySlot().get(gearSlot.key) ?? []"/>
+        }
+      </div>
+    }
+  </section>
+</div>

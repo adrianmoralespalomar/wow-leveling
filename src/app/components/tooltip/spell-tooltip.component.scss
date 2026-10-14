@@ -1,0 +1,36 @@
+:host {
+  display: block;
+  color: var(--tooltip-text);
+
+  p {
+    margin: 0;
+  }
+
+  .spell-name {
+    display: flex;
+    justify-content: space-between;
+    gap: 24px;
+    font-size: 1rem;
+    font-weight: 600;
+  }
+
+  .spell-subtitle {
+    color: var(--tooltip-muted);
+    font-size: 0.875rem;
+    font-weight: 400;
+  }
+
+  .spell-cost {
+    color: var(--tooltip-muted);
+  }
+
+  .spell-description {
+    margin-top: 4px;
+    color: var(--tooltip-highlight);
+  }
+
+  .spell-footer {
+    margin-top: 6px;
+    color: var(--tooltip-effect);
+  }
+}

@@ -1,0 +1,62 @@
+<div class="page">
+  <div class="page-intro">
+    <h1>Talentos</h1>
+    <p>
+      Los árboles muestran cómo los tendrás al nivel {{ level() }}. El talento marcado es el punto de este nivel. Mueve la
+      barra de nivel o pulsa en la lista para ver otro momento.
+    </p>
+  </div>
+
+  <fieldset class="build-picker">
+    <legend class="visually-hidden">Build</legend>
+    @for (option of gameData.talentBuilds(); track option.id) {
+      <label class="build-option" [class.selected]="option.id === build()?.id">
+        <input
+          type="radio"
+          name="talent-build"
+          [value]="option.id"
+          [checked]="option.id === build()?.id"
+          (change)="onBuildSelected(option.id)"/>
+        <span class="build-name">{{ option.name }}</span>
+        <span class="build-summary">{{ option.summary }}</span>
+      </label>
+    }
+  </fieldset>
+
+  @if (build(); as selectedBuild) {
+    <p class="notice">{{ selectedBuild.note }}</p>
+  }
+
+  <div class="trees">
+    @for (tree of gameData.talentTrees(); track tree.id) {
+      <app-talent-tree [tree]="tree" [ranks]="ranks()" [learnLevels]="learnLevels()" [currentTalentId]="currentTalentId()"/>
+    }
+  </div>
+
+  <section class="steps-section">
+    <h2>Orden de puntos</h2>
+    <ol class="step-list">
+      @for (step of steps(); track step.level) {
+        <li>
+          <button
+            type="button"
+            class="step"
+            [class.done]="step.level < level()"
+            [class.current]="step.level === level()"
+            [appTooltip]="step.tooltip"
+            (click)="onStepClicked(step.level)">
+            <span class="step-level">{{ step.level }}</span>
+            <app-game-icon [icon]="step.talent.icon" size="small"/>
+            <span class="step-name">{{ step.talent.name }}</span>
+            <span class="step-rank">{{ step.rank }}/{{ step.talent.maxRank }}</span>
+          </button>
+        </li>
+      }
+    </ol>
+  </section>
+
+  <p class="muted source-note">
+    Árboles y textos del cliente beta ({{ gameData.talentsVersion() }}). En Forever, el sistema Legacy (talento
+    «Talented») puede darte hasta 5 puntos extra en personajes posteriores.
+  </p>
+</div>

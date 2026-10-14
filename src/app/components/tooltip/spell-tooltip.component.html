@@ -1,0 +1,13 @@
+<p class="spell-name">
+  <span>{{ content().name }}</span>
+  @if (content().subtitle) {
+    <span class="spell-subtitle">{{ content().subtitle }}</span>
+  }
+</p>
+@if (content().cost) {
+  <p class="spell-cost">{{ content().cost }}</p>
+}
+<p class="spell-description">{{ content().description }}</p>
+@if (content().footer) {
+  <p class="spell-footer">{{ content().footer }}</p>
+}

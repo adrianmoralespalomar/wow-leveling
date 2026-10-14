@@ -1,0 +1,240 @@
+{
+  "updatedAt": "2026-10-12",
+  "rules": [
+    "Tame Beast, Call Pet y Dismiss Pet se aprenden al 10 con la misión de clase Taming the Beast; Training the Beast enseña Beast Training, Feed Pet y Revive Pet.",
+    "Solo puedes domar bestias de tu nivel o inferior (Blizzard lo corrigió en la beta el 24 de septiembre).",
+    "La mascota sube de nivel contigo luchando, pero sus habilidades no: cada rango pide un nivel mínimo de mascota y tienes que aprenderlo tú antes para enseñárselo.",
+    "Growl, Great Stamina, Natural Armor y las resistencias las enseña el instructor de mascotas. Bite, Claw, Dash, Dive y la habilidad propia de cada familia se aprenden domando una bestia que ya las tiene y dejándola usarlas en combate.",
+    "Enseñar un rango cuesta puntos de entrenamiento. Según las guías de la beta, el total es nivel de la mascota × (rango de lealtad − 1): 300 puntos para una mascota de nivel 60 en Best Friend. Comprueba la cifra en la ventana de Beast Training.",
+    "La lealtad tiene 6 rangos (Rebellious, Unruly, Submissive, Dependable, Faithful, Best Friend) y sube despacio si la mantienes alimentada y contenta y peleas con ella. Una mascota recién domada de nivel alto puede empezar con puntos negativos.",
+    "Máximo 4 habilidades activas a la vez. Las pasivas (Great Stamina, Natural Armor, resistencias) gastan puntos pero no ocupan hueco.",
+    "En Forever la mascota gana stats según tu equipo y ya no recibe los bufos de otros jugadores."
+  ],
+  "families": [
+    {
+      "id": 2,
+      "ability": "Prowl",
+      "tier": "top",
+      "role": "El mejor daño para subir. Golpea rápido y aprende Claw y Bite."
+    },
+    {
+      "id": 5,
+      "ability": "Charge",
+      "tier": "good",
+      "role": "Aguanta mucho y Charge genera amenaza al entrar. Ideal si te matan a menudo."
+    },
+    {
+      "id": 1,
+      "ability": "Furious Howl",
+      "tier": "good",
+      "role": "Furious Howl da poder de ataque a ti y al grupo cuerpo a cuerpo. La mejor para mazmorras."
+    },
+    {
+      "id": 11,
+      "ability": "Savage Rend",
+      "tier": "good",
+      "role": "Nuevo sangrado de Forever. Buen daño, alternativa al felino."
+    },
+    {
+      "id": 12,
+      "ability": "Dust Cloud",
+      "tier": "good",
+      "role": "Dust Cloud quita armadura al objetivo: todos tus disparos físicos pegan más."
+    },
+    {
+      "id": 4,
+      "ability": "Swipe",
+      "tier": "situational",
+      "role": "Swipe golpea a 3 enemigos: aguanta bien varios a la vez."
+    },
+    {
+      "id": 25,
+      "ability": "Tendon Rip",
+      "tier": "situational",
+      "role": "Ralentiza un 50%: perfecta para hacer kiting con el arco."
+    },
+    {
+      "id": 27,
+      "ability": "Lightning Breath",
+      "tier": "situational",
+      "role": "Daño de Naturaleza a distancia que ignora la armadura."
+    },
+    {
+      "id": 26,
+      "ability": "Mine!",
+      "tier": "situational",
+      "role": "Desarma 4 s. Muy útil en JcJ contra guerreros y pícaros."
+    },
+    {
+      "id": 6,
+      "ability": "Dismember",
+      "tier": "situational",
+      "role": "Reduce un 50% la curación recibida. Para JcJ."
+    },
+    {
+      "id": 24,
+      "ability": "Sonic Blast",
+      "tier": "situational",
+      "role": "Alarga un 60% el lanzamiento de hechizos. Contra lanzadores."
+    },
+    {
+      "id": 9,
+      "ability": "Thunderstomp",
+      "tier": "situational",
+      "role": "Daño en área alrededor del gorila: buena amenaza con varios enemigos."
+    },
+    {
+      "id": 21,
+      "ability": "Shell Shield",
+      "tier": "situational",
+      "role": "Reduce a la mitad el daño recibido 12 s (desde nivel 20 de mascota)."
+    },
+    {
+      "id": 7,
+      "ability": "Demoralizing Screech",
+      "tier": "situational",
+      "role": "Baja el poder de ataque de los enemigos cercanos."
+    },
+    {
+      "id": 3,
+      "ability": "Web",
+      "tier": "situational",
+      "role": "Inmoviliza al objetivo."
+    },
+    {
+      "id": 20,
+      "ability": "Scorpid Poison",
+      "tier": "situational",
+      "role": "Veneno que se acumula hasta 5 veces."
+    },
+    {
+      "id": 8,
+      "ability": "Pinch",
+      "tier": "situational",
+      "role": "Golpe que ralentiza un 50%."
+    },
+    {
+      "id": 319,
+      "ability": "Trickster's Dance",
+      "tier": "situational",
+      "role": "Familia nueva: +50% de esquiva y golpes más rápidos 12 s (desde nivel 20 de mascota)."
+    }
+  ],
+  "milestones": [
+    {
+      "level": 10,
+      "title": "Tu primera mascota",
+      "description": "Coge Taming the Beast en Razor Hill. Para tu mascota principal, Durotar Tiger es el felino más fácil de Durotar; Shal'ma es un felino raro del mismo nivel. Si prefieres aguante, un jabalí.",
+      "beastIds": [
+        3121,
+        276198
+      ],
+      "alternativeBeastIds": [
+        3100,
+        3225
+      ]
+    },
+    {
+      "level": 13,
+      "title": "Felino de The Barrens",
+      "description": "Dishu es un felino raro de nivel 13. Si no aparece, Savannah Prowler o Savannah Patriarch sirven igual: lo que importa es la familia, no el modelo.",
+      "beastIds": [
+        5865
+      ],
+      "alternativeBeastIds": [
+        3425,
+        3241
+      ]
+    },
+    {
+      "level": 17,
+      "title": "Probar las familias nuevas",
+      "description": "Si quieres variar, Sunscale Scytheclaw (raptor con Savage Rend) o Snort the Heckler (hiena rara con Tendon Rip) están en The Barrens.",
+      "beastIds": [
+        3256,
+        5829
+      ],
+      "alternativeBeastIds": [
+        5842
+      ]
+    },
+    {
+      "level": 22,
+      "title": "Lobo para mazmorras",
+      "description": "Mist Howler (lobo raro en Ashenvale) trae Furious Howl: llévalo cuando vayas en grupo a Blackfathom Deeps o Shadowfang Keep.",
+      "beastIds": [
+        10644
+      ],
+      "alternativeBeastIds": []
+    },
+    {
+      "level": 23,
+      "title": "Humar the Pridelord",
+      "description": "El felino raro clásico de The Barrens. Cambia a él si tu felino es de nivel bajo o quieres el modelo blanco.",
+      "beastIds": [
+        5828
+      ],
+      "alternativeBeastIds": []
+    },
+    {
+      "level": 25,
+      "title": "Rangos de Bite y Claw",
+      "description": "Giant Moss Creeper (Hillsbrad Foothills) y Elder Ashenvale Bear (Ashenvale) enseñan rangos altos de Bite y Claw. Dómalos, déjalos pelear y vuelve a tu mascota.",
+      "beastIds": [
+        2349,
+        3810
+      ],
+      "alternativeBeastIds": []
+    },
+    {
+      "level": 30,
+      "title": "Dash o Dive",
+      "description": "Desde el 30 tu mascota puede aprender Dash (o Dive las voladoras). Doma una bestia que la conozca para enseñársela: ayuda mucho al viajar y al perseguir.",
+      "beastIds": [],
+      "alternativeBeastIds": []
+    },
+    {
+      "level": 37,
+      "title": "Broken Tooth",
+      "description": "Felino raro de Badlands con ataques muy rápidos (1,0 s). Tarda 7-8 horas en reaparecer: si lo ves, dómalo. Si no, Araga (felino raro de Alterac Mountains, 35).",
+      "beastIds": [
+        2850
+      ],
+      "alternativeBeastIds": [
+        14222
+      ]
+    },
+    {
+      "level": 42,
+      "title": "Lobo de nivel 40",
+      "description": "Snarler (Feralas) u Old Cliff Jumper (The Hinterlands), lobos raros para el grupo de mazmorras del 40 al 50.",
+      "beastIds": [
+        5356,
+        8211
+      ],
+      "alternativeBeastIds": []
+    },
+    {
+      "level": 49,
+      "title": "Lobos raros de Felwood y Burning Steppes",
+      "description": "Death Howl (49) y Deathmaw (53). Ripscale (crocolisco) y Olm the Wise (ave rapaz) si vas a hacer JcJ.",
+      "beastIds": [
+        14339,
+        10077
+      ],
+      "alternativeBeastIds": [
+        14233,
+        14343
+      ]
+    },
+    {
+      "level": 57,
+      "title": "Rak'shiri",
+      "description": "Felino raro de Winterspring de nivel 57: la mascota de daño para llegar al 60 y empezar las mazmorras de nivel máximo.",
+      "beastIds": [
+        10200
+      ],
+      "alternativeBeastIds": []
+    }
+  ]
+}

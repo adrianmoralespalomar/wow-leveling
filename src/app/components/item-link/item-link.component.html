@@ -1,0 +1,29 @@
+@if (item(); as item) {
+  <a
+    class="item-anchor"
+    [href]="itemPageUrl()"
+    target="_blank"
+    rel="noopener"
+    [appTooltip]="tooltipContent()"
+    [attr.aria-label]="showName() ? null : item.name">
+    <app-game-icon [icon]="item.icon" [size]="iconSize()" [quality]="item.quality"/>
+    @if (showName()) {
+      <span class="item-text">
+        <span class="item-name" [attr.data-quality]="item.quality">{{ item.name }}</span>
+        @if (detail()) {
+          <span class="item-detail">{{ detail() }}</span>
+        }
+      </span>
+    }
+  </a>
+} @else {
+  <span class="item-anchor item-unknown">
+    <app-game-icon icon="inv_misc_questionmark" [size]="iconSize()"/>
+    @if (showName()) {
+      <span class="item-text">
+        <span class="item-name">Objeto sin datos</span>
+        <span class="item-detail">Aún no está en el cliente de la beta</span>
+      </span>
+    }
+  </span>
+}

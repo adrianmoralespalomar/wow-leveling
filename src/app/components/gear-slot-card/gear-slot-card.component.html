@@ -1,0 +1,39 @@
+<div class="slot-header">
+  <h3 class="slot-label">{{ gearSlot().label }}</h3>
+  @if (isUpgradeAvailable()) {
+    <span class="chip chip-accent">Mejora disponible</span>
+  }
+</div>
+
+@if (bestItem(); as best) {
+  <app-item-link [item]="best.item" [detail]="describeItemBriefly(best.item)"/>
+} @else {
+  <p class="slot-empty">Nada recomendable todavía a este nivel.</p>
+}
+
+@if (alternatives().length || upcomingUpgrade()) {
+  <div class="slot-extra">
+    @if (alternatives().length) {
+      <span class="slot-extra-group">
+        <span class="slot-extra-label">Alternativas</span>
+        @for (alternative of alternatives(); track alternative.item.id) {
+          <app-item-link [item]="alternative.item" [showName]="false" iconSize="small"/>
+        }
+      </span>
+    }
+    @if (upcomingUpgrade(); as upgrade) {
+      <span class="slot-extra-group">
+        <span class="slot-extra-label">Al {{ upgrade.minLevel }}</span>
+        <app-item-link [item]="upgrade.item" [showName]="false" iconSize="small"/>
+      </span>
+    }
+  </div>
+}
+
+@if (weakestEquippedItem(); as equipped) {
+  <p class="slot-equipped">
+    Llevas
+    <app-item-link [item]="equipped.item" [showName]="false" iconSize="small"/>
+    <span [attr.data-quality]="equipped.item.quality" class="slot-equipped-name">{{ equipped.item.name }}</span>
+  </p>
+}

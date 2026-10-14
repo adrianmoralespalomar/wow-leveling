@@ -1,0 +1,17 @@
+export type GearSlotKey =
+  | 'head'
+  | 'neck'
+  | 'shoulder'
+  | 'back'
+  | 'chest'
+  | 'wrist'
+  | 'hands'
+  | 'waist'
+  | 'legs'
+  | 'feet'
+  | 'finger'
+  | 'trinket'
+  | 'melee'
+  | 'ranged'
+  | 'ammo'
+  | 'quiver';

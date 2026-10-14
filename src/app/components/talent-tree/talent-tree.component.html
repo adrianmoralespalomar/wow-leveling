@@ -1,0 +1,23 @@
+<header class="tree-header">
+  <app-game-icon [icon]="tree().icon" size="small"/>
+  <h3 class="tree-name">{{ tree().name }}</h3>
+  <span class="tree-points">{{ spentPoints() }}</span>
+</header>
+<div class="tree-grid">
+  @for (cell of cells(); track cell.talent.id) {
+    <button
+      type="button"
+      class="talent"
+      [class.maxed]="cell.rank === cell.talent.maxRank"
+      [class.partial]="cell.rank > 0 && cell.rank < cell.talent.maxRank"
+      [class.planned]="cell.rank === 0 && cell.isInBuild"
+      [class.current]="cell.isCurrent"
+      [style.grid-row]="cell.talent.row"
+      [style.grid-column]="cell.talent.column"
+      [attr.aria-label]="cell.talent.name + ', rango ' + cell.rank + ' de ' + cell.talent.maxRank"
+      [appTooltip]="cell.tooltip">
+      <app-game-icon [icon]="cell.talent.icon"/>
+      <span class="talent-rank">{{ cell.rank }}/{{ cell.talent.maxRank }}</span>
+    </button>
+  }
+</div>

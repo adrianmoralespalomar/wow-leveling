@@ -1,0 +1,264 @@
+.export-disclaimer {
+  border-left: 3px solid var(--warning);
+  border-radius: 0 8px 8px 0;
+  background: rgb(230 161 92 / 9%);
+
+  summary {
+    padding: 12px 16px;
+    font-weight: 700;
+    cursor: pointer;
+  }
+
+  .disclaimer-body {
+    display: grid;
+    justify-items: start;
+    gap: 14px;
+    padding: 0 16px 16px;
+  }
+
+  .disclaimer-list {
+    display: grid;
+    gap: 6px;
+    max-width: 80ch;
+    margin: 0;
+    padding-left: 1.2em;
+    font-size: 0.9375rem;
+  }
+
+  .download-link {
+    text-decoration: none;
+  }
+}
+
+.import-steps {
+  display: grid;
+  gap: 6px;
+  max-width: 75ch;
+  margin: 0;
+  padding-left: 1.4em;
+  color: var(--text-muted);
+}
+
+code {
+  padding: 1px 5px;
+  border-radius: 4px;
+  background: var(--surface-sunken);
+  color: var(--text);
+  font-size: 0.875em;
+  overflow-wrap: anywhere;
+}
+
+.import-form {
+  display: grid;
+  gap: 10px;
+  max-width: 760px;
+}
+
+.import-label {
+  font-weight: 700;
+}
+
+.import-textarea {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid var(--line-strong);
+  border-radius: 8px;
+  background: var(--surface-sunken);
+  font-family: Consolas, 'Courier New', monospace;
+  font-size: 0.8125rem;
+  resize: vertical;
+}
+
+.import-error {
+  color: var(--warning);
+}
+
+.import-actions,
+.character-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.button-primary,
+.button-secondary {
+  padding: 8px 16px;
+  border: 1px solid var(--accent);
+  border-radius: 8px;
+  font-weight: 700;
+  cursor: pointer;
+
+  &:disabled {
+    opacity: 0.45;
+    cursor: default;
+  }
+}
+
+.button-primary {
+  background: var(--accent);
+  color: var(--background);
+}
+
+.button-secondary {
+  background: transparent;
+  color: var(--accent);
+}
+
+.character-header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 16px 24px;
+}
+
+.character-crest {
+  display: flex;
+  gap: 6px;
+}
+
+.character-identity {
+  display: grid;
+  flex: 1;
+  gap: 4px;
+  min-width: 240px;
+}
+
+// Barra de experiencia del juego: morada la ganada, azul la de descanso
+.xp-bar {
+  display: flex;
+  height: 10px;
+  max-width: 420px;
+  margin-top: 6px;
+  overflow: hidden;
+  border: 1px solid var(--line-strong);
+  border-radius: 5px;
+  background: var(--surface-sunken);
+}
+
+.xp-fill {
+  width: calc(var(--xp) * 1%);
+  background: #8c3fd1;
+}
+
+.xp-rested {
+  width: calc(var(--rested) * 1%);
+  background: rgb(46 115 230 / 70%);
+}
+
+.xp-text {
+  font-size: 0.8125rem;
+}
+
+.paperdoll-section {
+  display: grid;
+  gap: 14px;
+}
+
+.paperdoll-heading {
+  display: grid;
+  gap: 4px;
+}
+
+.paperdoll {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.paperdoll-column {
+  display: grid;
+  align-content: start;
+  gap: 6px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.paperdoll-slot {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  min-width: 0;
+  padding: 6px 10px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--surface);
+
+  &.has-upgrade {
+    border-color: var(--accent);
+  }
+}
+
+.slot-unknown {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+}
+
+.slot-empty app-game-icon {
+  opacity: 0.4;
+}
+
+.slot-text {
+  display: grid;
+  min-width: 0;
+}
+
+.slot-name {
+  overflow: hidden;
+  color: var(--quality-color);
+  font-weight: 600;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.slot-detail {
+  font-size: 0.8125rem;
+}
+
+.slot-upgrade {
+  display: inline-flex;
+  flex: none;
+  align-items: center;
+  gap: 6px;
+}
+
+.slot-upgrade-label {
+  color: var(--accent);
+  font-size: 0.8125rem;
+}
+
+.talents-summary {
+  display: grid;
+  gap: 12px;
+
+  .panel-title {
+    margin-bottom: 0;
+  }
+}
+
+.tree-points {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 12px;
+}
+
+.tree-points-row {
+  display: grid;
+}
+
+.tree-points-value {
+  color: var(--accent);
+  font-family: var(--font-display);
+  font-size: 2rem;
+  font-weight: 800;
+  line-height: 1;
+}
+
+@media (max-width: 900px) {
+  .paperdoll {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}

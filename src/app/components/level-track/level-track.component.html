@@ -1,0 +1,47 @@
+<div class="level-readout">
+  <button
+    type="button"
+    class="level-step"
+    aria-label="Bajar un nivel"
+    [disabled]="playerProgress.level() <= minLevel"
+    (click)="onPreviousLevelClicked()">−</button>
+  <output class="level-number" aria-live="polite">
+    <span class="level-caption">Nivel</span>
+    {{ playerProgress.level() }}
+  </output>
+  <button
+    type="button"
+    class="level-step"
+    aria-label="Subir un nivel"
+    [disabled]="playerProgress.level() >= maxLevel"
+    (click)="onNextLevelClicked()">+</button>
+</div>
+
+<div class="track" [style.--progress]="progress()">
+  <div class="track-markers">
+    @for (marker of markers(); track $index) {
+      <button
+        type="button"
+        class="track-marker"
+        [class.reached]="marker.isReached"
+        [style.--position]="marker.position"
+        [attr.aria-label]="'Nivel ' + marker.level + ': ' + marker.tooltip.name"
+        [appTooltip]="marker.tooltip"
+        (click)="onMarkerClicked(marker.level)"></button>
+    }
+  </div>
+  <input
+    class="track-input"
+    type="range"
+    [min]="minLevel"
+    [max]="maxLevel"
+    step="1"
+    [value]="playerProgress.level()"
+    aria-label="Nivel actual"
+    (input)="onLevelSliderMoved($event)"/>
+  <div class="track-ticks" aria-hidden="true">
+    @for (tick of ticks; track tick.level) {
+      <span class="track-tick" [style.--position]="tick.position">{{ tick.level }}</span>
+    }
+  </div>
+</div>

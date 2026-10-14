@@ -1,0 +1,21 @@
+<div class="pet-level" aria-hidden="true">{{ view().milestone.level }}</div>
+<div class="pet-body">
+  <p class="pet-kind">{{ isUpcoming() ? 'Mascota, próximo hito' : 'Mascota' }}</p>
+  <h3>{{ view().milestone.title }}</h3>
+  <p class="pet-description">{{ view().milestone.description }}</p>
+  @if (view().beasts.length) {
+    <div class="pet-beasts">
+      @for (beast of view().beasts; track beast.beast.id) {
+        <app-beast-link [view]="beast"/>
+      }
+    </div>
+  }
+  @if (view().alternatives.length) {
+    <div class="pet-alternatives">
+      <span class="muted">También</span>
+      @for (beast of view().alternatives; track beast.beast.id) {
+        <app-beast-link [view]="beast" [showName]="false" iconSize="small"/>
+      }
+    </div>
+  }
+</div>

@@ -1,0 +1,67 @@
+<div class="page">
+  <div class="page-intro">
+    <h1>Equipo por ranura</h1>
+    <p>
+      Todo lo que un cazador de la Horda puede conseguir, ordenado por nivel. La fila marcada es lo mejor que puedes
+      llevar al {{ playerProgress.level() }}. Del 40 al 55 muchas mazmorras aún no muestran botín en la beta.
+    </p>
+  </div>
+
+  <div class="slot-picker" role="tablist" aria-label="Ranura">
+    @for (gearSlot of gearSlots; track gearSlot.key) {
+      <button
+        type="button"
+        role="tab"
+        class="slot-tab"
+        [class.active]="gearSlot.key === selectedSlotKey()"
+        [attr.aria-selected]="gearSlot.key === selectedSlotKey()"
+        (click)="onSlotSelected(gearSlot.key)">{{ gearSlot.label }}</button>
+    }
+  </div>
+
+  <div class="filters">
+    <label class="toggle">
+      <input type="checkbox" [checked]="showAllLevels()" (change)="onShowAllLevelsToggled($event)"/>
+      Ver todos los niveles (si no, ±{{ levelWindow }} niveles)
+    </label>
+    <label class="toggle">
+      <input type="checkbox" [checked]="playerProgress.includeRandomDrops()" (change)="onRandomDropsToggled($event)"/>
+      Incluir botín aleatorio de la subasta
+    </label>
+  </div>
+
+  <div class="table-scroll">
+    <table class="gear-table">
+      <thead>
+        <tr>
+          <th scope="col" class="column-level">Nivel</th>
+          <th scope="col">Objeto</th>
+          @if (selectedSlotKey() === 'ranged') {
+            <th scope="col" class="column-number">DPS</th>
+            <th scope="col" class="column-number">Vel.</th>
+          }
+          <th scope="col" class="column-number">Puntos</th>
+          <th scope="col" class="column-source">Procedencia</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (row of rows(); track row.item.id) {
+          <tr [class.best]="row.item.id === bestItemId()" [class.future]="row.minLevel > playerProgress.level()">
+            <td class="column-level">{{ row.minLevel }}</td>
+            <td><app-item-link [item]="row.item" iconSize="small"/></td>
+            @if (selectedSlotKey() === 'ranged') {
+              <td class="column-number">{{ row.item.dps ? formatDecimal(row.item.dps) : '?' }}</td>
+              <td class="column-number">{{ row.item.speed ? formatDecimal(row.item.speed) : '' }}</td>
+            }
+            <td class="column-number">{{ formatDecimal(row.score) }}</td>
+            <td class="column-source">{{ describeItemSource(row.item) }}</td>
+          </tr>
+        } @empty {
+          <tr>
+            <td colspan="6" class="muted empty-row">No hay objetos para esta ranura cerca de tu nivel.</td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  </div>
+</div>

@@ -1,0 +1,72 @@
+<button type="button" class="beta-button" aria-haspopup="dialog" (click)="onBetaNoticeButtonClicked()">
+  <span class="beta-dot" aria-hidden="true"></span>
+  <span class="beta-label-long">Datos de la beta, hasta nivel {{ gameData.meta()?.betaLevelCap ?? 30 }}</span>
+  <span class="beta-label-short">Beta 1-{{ gameData.meta()?.betaLevelCap ?? 30 }}</span>
+</button>
+
+<dialog #dialog class="beta-dialog" aria-labelledby="beta-dialog-title">
+  <div class="dialog-content">
+    <h2 id="beta-dialog-title">Información recopilada de la beta</h2>
+
+    <ul class="dialog-list">
+      <li>
+        Todo sale del cliente beta de WoW Forever. La beta solo deja llegar al
+        <strong>nivel {{ gameData.meta()?.betaLevelCap ?? 30 }}</strong>: lo que hay por encima (ruta, armas, builds y
+        mascotas del 30 al 60) está planificado y puede cambiar.
+      </li>
+      <li>
+        El botín de casi todas las mazmorras del 33 al 55 y los arcos pre-banda están ocultos en la beta: aparecerán cuando
+        Blizzard los publique.
+      </li>
+      <li>La puntuación de los objetos y la build de Puntería son propuestas orientativas, sin probar en el juego.</li>
+      <li>Lanzamiento: 4 de noviembre de 2026. Las bandas abren el 9 de diciembre.</li>
+    </ul>
+
+    <div class="dialog-status">
+      <h3>Datos actuales</h3>
+      @if (gameData.meta(); as meta) {
+        <p>
+          Generados el {{ meta.generatedAt | date: 'd/M/y, HH:mm' }} con el cliente {{ meta.itemsBuild }}
+          ({{ meta.itemsBuildDate }}): {{ meta.itemCount }} objetos y {{ meta.beastCount }} bestias.
+        </p>
+      } @else {
+        <p class="muted">Sin información de la última generación. Ejecuta npm run data.</p>
+      }
+      <p class="muted">
+        Refrescar vuelve a descargar objetos, talentos, hechizos y mascotas de las fuentes. Lo escrito a mano (hitos,
+        builds, ruta, addons y mascota por tramo) se edita en public/data.
+      </p>
+    </div>
+
+    <div class="dialog-actions">
+      <button
+        type="button"
+        class="dialog-button"
+        [disabled]="dataRefresh.state() === 'checking' || dataRefresh.state() === 'refreshing'"
+        (click)="onCheckUpdatesButtonClicked()">
+        {{ dataRefresh.state() === 'checking' ? 'Buscando…' : 'Buscar novedades' }}
+      </button>
+      <button
+        type="button"
+        class="dialog-button primary"
+        [disabled]="dataRefresh.state() === 'checking' || dataRefresh.state() === 'refreshing'"
+        (click)="onRefreshDataButtonClicked()">
+        {{ dataRefresh.state() === 'refreshing' ? 'Refrescando…' : 'Refrescar datos' }}
+      </button>
+      @if (dataRefresh.state() === 'unavailable') {
+        <button type="button" class="dialog-button" (click)="onReloadLocalDataButtonClicked()">Volver a cargar</button>
+      }
+    </div>
+
+    @if (dataRefresh.message(); as message) {
+      <p
+        class="dialog-message"
+        role="status"
+        [class.warning]="dataRefresh.state() === 'error' || dataRefresh.state() === 'unavailable'">
+        {{ message }}
+      </p>
+    }
+
+    <button type="button" class="dialog-close" aria-label="Cerrar" (click)="onCloseDialogButtonClicked()">×</button>
+  </div>
+</dialog>

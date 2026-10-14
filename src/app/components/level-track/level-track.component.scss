@@ -1,0 +1,172 @@
+:host {
+  --thumb-size: 22px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+
+  .level-readout {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    flex: none;
+  }
+
+  .level-number {
+    display: grid;
+    min-width: 2.4ch;
+    font-family: var(--font-display);
+    font-size: 3rem;
+    font-weight: 800;
+    font-variant-numeric: lining-nums tabular-nums;
+    line-height: 0.9;
+    text-align: center;
+    color: var(--text);
+  }
+
+  .level-caption {
+    font-family: var(--font-ui);
+    font-size: 0.75rem;
+    font-weight: 500;
+    line-height: 1.4;
+    color: var(--text-muted);
+  }
+
+  .level-step {
+    display: grid;
+    place-items: center;
+    width: 32px;
+    height: 32px;
+    border: 1px solid var(--line-strong);
+    border-radius: 50%;
+    background: var(--surface);
+    color: var(--text);
+    font-size: 1.125rem;
+    line-height: 1;
+    cursor: pointer;
+
+    &:hover:not(:disabled) {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    &:disabled {
+      opacity: 0.35;
+      cursor: default;
+    }
+  }
+
+  .track {
+    position: relative;
+    flex: 1;
+    min-width: 0;
+    padding-top: 18px;
+  }
+
+  .track-markers {
+    position: absolute;
+    inset: 0 0 auto;
+    height: 16px;
+  }
+
+  // Posición alineada con el centro del tirador del slider
+  .track-marker,
+  .track-tick {
+    position: absolute;
+    left: calc(var(--position) * (100% - var(--thumb-size)) + var(--thumb-size) / 2);
+    transform: translateX(-50%);
+  }
+
+  .track-marker {
+    top: 2px;
+    width: 10px;
+    height: 10px;
+    padding: 0;
+    border: 1px solid var(--accent);
+    background: var(--background);
+    rotate: 45deg;
+    translate: 0 0;
+    cursor: pointer;
+
+    &.reached {
+      background: var(--accent);
+    }
+
+    &:hover {
+      scale: 1.35;
+    }
+  }
+
+  .track-input {
+    width: 100%;
+    height: var(--thumb-size);
+    margin: 0;
+    background: transparent;
+    appearance: none;
+    cursor: pointer;
+
+    &::-webkit-slider-runnable-track {
+      height: 12px;
+      border: 1px solid var(--line-strong);
+      border-radius: 6px;
+      background:
+        repeating-linear-gradient(90deg, transparent 0 calc(5% - 1px), rgb(0 0 0 / 35%) calc(5% - 1px) 5%),
+        linear-gradient(90deg, var(--xp-fill) calc(var(--progress) * 100%), var(--surface-sunken) 0);
+    }
+
+    &::-moz-range-track {
+      height: 12px;
+      border: 1px solid var(--line-strong);
+      border-radius: 6px;
+      background:
+        repeating-linear-gradient(90deg, transparent 0 calc(5% - 1px), rgb(0 0 0 / 35%) calc(5% - 1px) 5%),
+        linear-gradient(90deg, var(--xp-fill) calc(var(--progress) * 100%), var(--surface-sunken) 0);
+    }
+
+    &::-webkit-slider-thumb {
+      width: var(--thumb-size);
+      height: var(--thumb-size);
+      margin-top: -6px;
+      border: 2px solid var(--background);
+      border-radius: 50%;
+      background: var(--accent);
+      box-shadow: 0 0 0 1px var(--accent);
+      appearance: none;
+    }
+
+    &::-moz-range-thumb {
+      width: var(--thumb-size);
+      height: var(--thumb-size);
+      border: 2px solid var(--background);
+      border-radius: 50%;
+      background: var(--accent);
+    }
+  }
+
+  .track-ticks {
+    position: relative;
+    height: 16px;
+    margin-top: 2px;
+  }
+
+  .track-tick {
+    top: 0;
+    color: var(--text-muted);
+    font-size: 0.75rem;
+    font-variant-numeric: tabular-nums;
+  }
+}
+
+@media (max-width: 640px) {
+  :host {
+    gap: 12px;
+
+    .level-number {
+      font-size: 2.25rem;
+    }
+
+    .level-step {
+      width: 28px;
+      height: 28px;
+    }
+  }
+}

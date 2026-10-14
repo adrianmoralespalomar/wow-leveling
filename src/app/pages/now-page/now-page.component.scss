@@ -1,0 +1,250 @@
+.now-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.25fr);
+  gap: 20px;
+}
+
+.level-panel,
+.weapon-panel {
+  display: grid;
+  align-content: start;
+  gap: 18px;
+}
+
+.level-panel .panel-title,
+.weapon-panel .panel-title {
+  margin-bottom: 0;
+}
+
+.level-block {
+  display: grid;
+  gap: 10px;
+
+  & + .level-block {
+    padding-top: 16px;
+    border-top: 1px solid var(--line);
+  }
+}
+
+.block-title {
+  color: var(--text-muted);
+  font-family: var(--font-ui);
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
+.block-link {
+  justify-self: start;
+  font-size: 0.875rem;
+}
+
+.talent-step {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 12px;
+  border: 1px solid var(--accent);
+  border-radius: 8px;
+  background: var(--accent-soft);
+  text-align: left;
+  cursor: help;
+}
+
+.talent-step-text {
+  display: grid;
+}
+
+.talent-step-name {
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+  font-weight: 700;
+}
+
+.inline-spell {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 2px 4px;
+  border: 0;
+  border-radius: 4px;
+  background: none;
+  text-align: left;
+  cursor: help;
+
+  &:hover {
+    background: var(--surface-raised);
+  }
+}
+
+.ability-list {
+  display: grid;
+  gap: 4px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.next-line {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px;
+  color: var(--text-muted);
+  font-size: 0.875rem;
+}
+
+.weapon-best {
+  background: var(--surface-raised);
+}
+
+.pet-panel {
+  display: grid;
+  gap: 16px;
+
+  .panel-title {
+    margin-bottom: 0;
+  }
+}
+
+.pet-heading {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 4px 16px;
+}
+
+.pet-columns {
+  display: grid;
+  grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+  gap: 20px 32px;
+}
+
+.pet-milestones,
+.pet-nearby {
+  display: grid;
+  align-content: start;
+  gap: 16px;
+}
+
+.pet-nearby {
+  gap: 10px;
+}
+
+.pet-unlocks {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 8px;
+  font-size: 0.9375rem;
+}
+
+.where-panel {
+  display: grid;
+  gap: 16px;
+
+  .panel-title {
+    margin-bottom: 0;
+  }
+}
+
+.zone-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 12px 24px;
+}
+
+.zone {
+  display: grid;
+  gap: 2px;
+  font-size: 0.9375rem;
+}
+
+.zone-name {
+  font-weight: 700;
+}
+
+.zone-spanish-name {
+  margin-top: -2px;
+  color: var(--text-muted);
+  font-size: 0.8125rem;
+  font-style: italic;
+}
+
+.dungeon-heading {
+  padding-top: 12px;
+  border-top: 1px solid var(--line);
+}
+
+.dungeon-list {
+  display: grid;
+  gap: 2px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.dungeon {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px 20px;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--line);
+
+  &:last-child {
+    border-bottom: 0;
+  }
+}
+
+.dungeon-info {
+  display: grid;
+  gap: 2px;
+  font-size: 0.9375rem;
+}
+
+.dungeon-name {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 700;
+}
+
+.dungeon-loot {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.875rem;
+}
+
+.gear-section {
+  display: grid;
+  gap: 12px;
+}
+
+.gear-heading {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 8px 20px;
+}
+
+.gear-note {
+  max-width: 80ch;
+  font-size: 0.9375rem;
+}
+
+.gear-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 12px;
+}
+
+@media (max-width: 860px) {
+  .now-grid,
+  .pet-columns {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}

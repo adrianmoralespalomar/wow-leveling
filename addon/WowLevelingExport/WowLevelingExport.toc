@@ -1,0 +1,7 @@
+## Interface: 16001
+## Title: WowLevelingExport
+## Notes: Exporta tu personaje (equipo, talentos, nivel y mascota) para la guía Rastro. Usa /exportpj
+## Author: Adrian
+## Version: 1.0.0
+
+WowLevelingExport.lua

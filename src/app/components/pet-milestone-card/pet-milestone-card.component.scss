@@ -1,0 +1,56 @@
+:host {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 14px;
+  min-width: 0;
+
+  .pet-level {
+    display: grid;
+    place-items: center;
+    width: 44px;
+    height: 44px;
+    border: 1px solid var(--xp-fill);
+    border-radius: 50%;
+    color: var(--xp-fill);
+    font-family: var(--font-display);
+    font-size: 1.25rem;
+    font-weight: 800;
+  }
+
+  .pet-body {
+    display: grid;
+    gap: 6px;
+    min-width: 0;
+  }
+
+  .pet-kind {
+    color: var(--text-muted);
+    font-size: 0.8125rem;
+  }
+
+  .pet-description {
+    max-width: 62ch;
+    color: var(--text-muted);
+    font-size: 0.9375rem;
+  }
+
+  .pet-beasts {
+    display: grid;
+    gap: 8px;
+    margin-top: 4px;
+  }
+
+  .pet-alternatives {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.8125rem;
+  }
+}
+
+:host(.upcoming) .pet-level {
+  border-style: dashed;
+  border-color: var(--line-strong);
+  color: var(--text-muted);
+}

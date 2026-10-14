@@ -1,0 +1,40 @@
+:host {
+  display: inline-flex;
+  min-width: 0;
+
+  .beast-anchor {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    min-width: 0;
+    color: inherit;
+    text-decoration: none;
+
+    &:hover .beast-name {
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+  }
+
+  .beast-text {
+    display: grid;
+    min-width: 0;
+  }
+
+  .beast-name {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-weight: 600;
+    line-height: 1.25;
+  }
+
+  .beast-detail {
+    overflow: hidden;
+    color: var(--text-muted);
+    font-size: 0.8125rem;
+    line-height: 1.3;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+}

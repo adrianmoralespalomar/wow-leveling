@@ -1,0 +1,46 @@
+<div class="page">
+  <div class="page-intro">
+    <h1>Addons</h1>
+    <p>
+      Lo que usa la gente para subir en Forever, con su estado a {{ addonsData()?.updatedAt }}. Los marcados como
+      esenciales son los que instalaría desde el primer día.
+    </p>
+  </div>
+
+  @if (addonsData(); as data) {
+    <p class="notice">{{ data.warning }}</p>
+  }
+
+  @for (group of groups(); track group.category) {
+    <section class="addon-group">
+      <h2>{{ group.category }}</h2>
+      <ul class="addon-list">
+        @for (addon of group.addons; track addon.name) {
+          <li class="addon" [class.essential]="addon.essential">
+            <div class="addon-head">
+              <h3>{{ addon.name }}</h3>
+              @if (addon.essential) {
+                <span class="chip chip-accent">Esencial</span>
+              }
+            </div>
+            <p>{{ addon.description }}</p>
+            <p class="muted addon-status">{{ addon.status }}</p>
+            @if (addon.caveat) {
+              <p class="addon-caveat">{{ addon.caveat }}</p>
+            }
+            <a class="addon-link" [href]="addon.url" target="_blank" rel="noopener">Abrir la página del addon</a>
+          </li>
+        }
+      </ul>
+    </section>
+  }
+
+  <section class="addon-group own-addon">
+    <h2>WowLevelingExport, el addon de esta guía</h2>
+    <p>
+      Descomprímelo en <code>Interface/AddOns</code> de tu instalación de Forever, junto a tus otros addons. En el juego
+      escribe <code>/exportpj</code>, copia el texto y pégalo en <a routerLink="/personaje">Mi personaje</a>.
+    </p>
+    <a class="addon-link" href="downloads/WowLevelingExport.zip" download>Descargar WowLevelingExport (.zip)</a>
+  </section>
+</div>

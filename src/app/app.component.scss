@@ -1,0 +1,127 @@
+:host {
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  min-height: 100dvh;
+}
+
+.app-header {
+  position: sticky;
+  z-index: 10;
+  top: 0;
+  border-bottom: 1px solid var(--line);
+  background: rgb(22 32 27 / 94%);
+  backdrop-filter: blur(8px);
+
+  .header-inner {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 10px;
+    width: min(100%, var(--page-width));
+    margin: 0 auto;
+    padding: 10px var(--page-gutter) 12px;
+  }
+
+  .header-top {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px 24px;
+  }
+
+  .header-track-row {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    min-width: 0;
+
+    app-level-track {
+      flex: 1;
+      min-width: 0;
+    }
+  }
+
+  .brand {
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+    color: inherit;
+    text-decoration: none;
+  }
+
+  .brand-name {
+    font-family: var(--font-display);
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: var(--accent);
+  }
+
+  .brand-tagline {
+    color: var(--text-muted);
+    font-size: 0.875rem;
+  }
+
+  .main-nav {
+    display: flex;
+    gap: 2px;
+    min-width: 0;
+    max-width: 100%;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+
+  .nav-link {
+    padding: 6px 12px;
+    border-radius: 6px;
+    color: var(--text-muted);
+    font-weight: 500;
+    text-decoration: none;
+    white-space: nowrap;
+
+    &:hover {
+      color: var(--text);
+      background: var(--surface);
+    }
+
+    &.active {
+      color: var(--background);
+      background: var(--accent);
+    }
+  }
+}
+
+.load-error {
+  width: min(100% - 2 * var(--page-gutter), var(--page-width));
+  margin: 20px auto 0;
+}
+
+.app-footer {
+  padding: 20px var(--page-gutter) 28px;
+  border-top: 1px solid var(--line);
+  color: var(--text-muted);
+  font-size: 0.8125rem;
+  text-align: center;
+}
+
+// En el móvil la cabecera se reduce a la navegación y la barra de nivel
+@media (max-width: 640px) {
+  .app-header {
+    .header-inner {
+      gap: 6px;
+      padding-top: 6px;
+      padding-bottom: 8px;
+    }
+
+    .brand {
+      display: none;
+    }
+
+    .main-nav {
+      width: 100%;
+    }
+
+    .header-track-row {
+      gap: 8px;
+    }
+  }
+}

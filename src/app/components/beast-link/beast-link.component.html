@@ -1,0 +1,20 @@
+<a
+  class="beast-anchor"
+  [href]="view().mapUrl"
+  target="_blank"
+  rel="noopener"
+  [appTooltip]="view().tooltip"
+  [attr.aria-label]="showName() ? null : view().beast.name">
+  <app-game-icon [icon]="icon()" [size]="iconSize()" [quality]="view().beast.isRare ? 4 : null"/>
+  @if (showName()) {
+    <span class="beast-text">
+      <span class="beast-name">
+        {{ view().beast.name }}
+        @if (view().beast.isRare) {
+          <span class="chip chip-accent">Raro</span>
+        }
+      </span>
+      <span class="beast-detail">{{ detail() }}</span>
+    </span>
+  }
+</a>

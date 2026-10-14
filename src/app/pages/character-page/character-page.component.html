@@ -1,0 +1,163 @@
+<div class="page">
+  @if (!character()) {
+    <div class="page-intro">
+      <h1>Mi personaje</h1>
+      <p>Trae tu personaje desde el juego para ver tu equipo, qué ranuras puedes mejorar y tus talentos.</p>
+    </div>
+  }
+
+  <details class="export-disclaimer" [open]="!character()">
+    <summary>Cómo llegan aquí los datos de tu personaje</summary>
+    <div class="disclaimer-body">
+      <ul class="disclaimer-list">
+        <li>
+          Blizzard todavía no ofrece armería ni API pública para Forever (además, no hay reinos), así que esta web no
+          puede buscar tu personaje por nombre.
+        </li>
+        <li>
+          Los datos salen del addon <strong>WowLevelingExport</strong>, incluido en esta guía. Lee en el juego tu equipo,
+          talentos, nivel, experiencia, zona y mascota, y genera un texto para pegarlo aquí.
+        </li>
+        <li>
+          Es una foto del momento en que exportas: cuando cambies de equipo o subas de nivel, vuelve a escribir
+          <code>/exportpj</code> y pega el texto nuevo.
+        </li>
+        <li>El texto se guarda solo en este navegador. No se envía a ningún servidor.</li>
+        <li>
+          Los objetos que aún no están en los datos de la beta salen con su nombre, pero sin icono ni tooltip. No hay
+          modelo 3D del personaje: se muestra el equipo con sus iconos.
+        </li>
+      </ul>
+      <ol class="import-steps">
+        <li>
+          Descarga el addon y descomprímelo en la carpeta <code>Interface/AddOns</code> de Forever, de forma que quede
+          <code>Interface/AddOns/WowLevelingExport</code>.
+        </li>
+        <li>En el juego escribe <code>/exportpj</code>: se abre una ventana con el texto ya seleccionado.</li>
+        <li>Pulsa Ctrl+C, vuelve aquí y pégalo{{ character() ? ' tras pulsar Cambiar personaje' : ' abajo' }}.</li>
+      </ol>
+      <a class="button-secondary download-link" href="downloads/WowLevelingExport.zip" download>Descargar el addon (.zip)</a>
+    </div>
+  </details>
+
+  @if (!character()) {
+    <div class="import-form">
+      <label class="import-label" for="character-export">Texto exportado</label>
+      <textarea
+        id="character-export"
+        class="import-textarea"
+        rows="5"
+        spellcheck="false"
+        placeholder="WLE1^..."
+        [value]="draftExport()"
+        (input)="onDraftExportChanged($event)"></textarea>
+      @if (characterService.parseError(); as error) {
+        <p class="import-error" role="alert">{{ error }}</p>
+      }
+      <div class="import-actions">
+        <button type="button" class="button-primary" [disabled]="!draftExport().trim()" (click)="onLoadCharacterClicked()">
+          Cargar personaje
+        </button>
+        <button type="button" class="button-secondary" (click)="onSampleCharacterClicked()">Ver un ejemplo</button>
+      </div>
+    </div>
+  } @else {
+    @if (character(); as character) {
+      <section class="character-header">
+        <div class="character-crest">
+          <app-game-icon [icon]="'achievement_character_' + character.race.toLowerCase() + '_male'" size="large"/>
+          <app-game-icon [icon]="'classicon_' + character.className.toLowerCase()" size="large"/>
+        </div>
+        <div class="character-identity">
+          <h1>{{ character.name }}</h1>
+          <p class="muted">{{ characterSummary() }}</p>
+          @if (character.experienceToLevel) {
+            <div
+              class="xp-bar"
+              role="img"
+              [attr.aria-label]="'Experiencia ' + formatDecimal(experiencePercent()) + ' %'"
+              [style.--xp]="experiencePercent()"
+              [style.--rested]="restedPercent()">
+              <span class="xp-fill"></span>
+              <span class="xp-rested"></span>
+            </div>
+            <p class="muted xp-text">{{ experienceSummary() }}</p>
+          }
+        </div>
+        <div class="character-actions">
+          @if (character.level !== playerProgress.level()) {
+            <button type="button" class="button-primary" (click)="onUseCharacterLevelClicked(character.level)">
+              Usar nivel {{ character.level }} en la guía
+            </button>
+          }
+          <button type="button" class="button-secondary" (click)="onChangeCharacterClicked()">Cambiar personaje</button>
+        </div>
+      </section>
+
+      <section class="paperdoll-section">
+        <div class="paperdoll-heading">
+          <h2>Equipo</h2>
+          <p class="muted">
+            @if (upgradeCount()) {
+              {{ upgradeCount() }} ranuras tienen algo mejor a tu nivel. Pasa el ratón por la mejora para verla.
+            } @else {
+              No hay mejoras claras para tu nivel con los datos actuales.
+            }
+          </p>
+        </div>
+
+        <div class="paperdoll">
+          @for (column of [leftEntries(), rightEntries(), bottomEntries()]; track $index) {
+            <ul class="paperdoll-column">
+              @for (entry of column; track entry.slot.inventoryId) {
+                <li class="paperdoll-slot" [class.has-upgrade]="entry.upgrade">
+                  @if (entry.item) {
+                    <app-item-link [item]="entry.item" [detail]="entry.slot.label"/>
+                  } @else if (entry.equipped) {
+                    <span class="slot-unknown">
+                      <app-game-icon [icon]="entry.slot.emptyIcon" [quality]="entry.equipped.quality"/>
+                      <span class="slot-text">
+                        <span class="slot-name" [attr.data-quality]="entry.equipped.quality">{{ entry.equipped.name }}</span>
+                        <span class="muted slot-detail">{{ entry.slot.label }}, sin datos en la guía</span>
+                      </span>
+                    </span>
+                  } @else {
+                    <span class="slot-unknown slot-empty">
+                      <app-game-icon [icon]="entry.slot.emptyIcon"/>
+                      <span class="slot-text">
+                        <span class="muted">{{ entry.slot.label }}</span>
+                        <span class="muted slot-detail">Vacío</span>
+                      </span>
+                    </span>
+                  }
+                  @if (entry.upgrade; as upgrade) {
+                    <span class="slot-upgrade">
+                      <span class="slot-upgrade-label">Mejor</span>
+                      <app-item-link [item]="upgrade.item" [showName]="false" iconSize="small"/>
+                    </span>
+                  }
+                </li>
+              }
+            </ul>
+          }
+        </div>
+      </section>
+
+      <section class="panel talents-summary">
+        <h2 class="panel-title">Talentos</h2>
+        <div class="tree-points">
+          @for (treeName of treeNames(); track $index) {
+            <p class="tree-points-row">
+              <span class="tree-points-value">{{ treePoints()[$index] ?? 0 }}</span>
+              <span>{{ treeName }}</span>
+              @if (buildTreePoints().length) {
+                <span class="muted">La build lleva {{ buildTreePoints()[$index] }} a tu nivel</span>
+              }
+            </p>
+          }
+        </div>
+        <a routerLink="/talentos">Comparar en la página de talentos</a>
+      </section>
+    }
+  }
+</div>

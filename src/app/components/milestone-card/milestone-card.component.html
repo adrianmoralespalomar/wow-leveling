@@ -1,0 +1,24 @@
+<div class="milestone-level" aria-hidden="true">{{ view().milestone.level }}</div>
+<div class="milestone-body">
+  <p class="milestone-kind">
+    {{ kindLabels[view().milestone.kind] + (isUpcoming() ? ', próximo hito' : '') }}
+  </p>
+  <h3 class="milestone-title">{{ view().milestone.title }}</h3>
+  <p class="milestone-description">{{ view().milestone.description }}</p>
+
+  @if (view().items.length) {
+    <div class="milestone-items">
+      @for (item of view().items; track $index) {
+        <app-item-link [item]="item" [detail]="item ? describeItemBriefly(item) : null"/>
+      }
+    </div>
+  }
+  @if (view().alternatives.length) {
+    <div class="milestone-alternatives">
+      <span class="muted">Mientras tanto o en su lugar</span>
+      @for (item of view().alternatives; track $index) {
+        <app-item-link [item]="item" [showName]="false" iconSize="small"/>
+      }
+    </div>
+  }
+</div>

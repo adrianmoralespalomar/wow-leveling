@@ -1,0 +1,136 @@
+<div class="page">
+  <div class="page-intro">
+    <h1>Mascotas</h1>
+    <p>
+      Qué mascota llevar en cada tramo como Puntería y dónde domarla. Las bestias son las del cliente beta, con su nombre
+      en inglés; pulsa en una para ver en el mapa dónde aparece.
+    </p>
+  </div>
+
+  <section class="panel nearby-panel">
+    <h2 class="panel-title">Para domar a tu nivel ({{ playerProgress.level() }})</h2>
+    @if (nearbyBeasts().length) {
+      <div class="nearby-grid">
+        @for (beast of nearbyBeasts(); track beast.beast.id) {
+          <app-beast-link [view]="beast"/>
+        }
+      </div>
+      <p class="muted nearby-note">Solo felinos, jabalíes, lobos, raptores y zancudos fuera de zonas de la Alianza. Los raros salen primero.</p>
+    } @else {
+      <p class="muted">Tu primera mascota llega al nivel 10 con la misión Taming the Beast.</p>
+    }
+  </section>
+
+  <section class="panel abilities-panel">
+    <div class="abilities-heading">
+      <h2 class="panel-title">Habilidades de tu mascota al nivel {{ playerProgress.level() }}</h2>
+      <label class="family-picker">
+        Familia
+        <select class="select" [value]="playerProgress.petFamilyName()" (change)="onPetFamilySelected($event)">
+          @for (family of gameData.petFamilies(); track family.id) {
+            <option [value]="family.name" [selected]="family.name === playerProgress.petFamilyName()">{{ family.name }}</option>
+          }
+        </select>
+      </label>
+    </div>
+    <p class="muted abilities-note">
+      La mascota no aprende rangos sola al subir. Cada rango pide un nivel mínimo de mascota y que tú lo conozcas antes:
+      del instructor de mascotas o domando una bestia que lo tenga y dejándola pelear. Después se lo enseñas en Beast
+      Training gastando puntos de entrenamiento.
+    </p>
+    <div class="table-scroll">
+      <table class="abilities-table">
+        <thead>
+          <tr>
+            <th scope="col">Habilidad</th>
+            <th scope="col" class="column-number">Rango</th>
+            <th scope="col" class="column-number">Puntos</th>
+            <th scope="col">Cómo aprenderlo</th>
+            <th scope="col">Siguiente</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (entry of abilityProgress(); track entry.ability.name) {
+            <tr [class.locked]="!entry.currentRank">
+              <td>
+                <button type="button" class="ability-name" [appTooltip]="entry.tooltip">
+                  @if (entry.ability.icon) {
+                    <app-game-icon [icon]="entry.ability.icon" size="small"/>
+                  }
+                  {{ entry.ability.name }}
+                </button>
+              </td>
+              <td class="column-number">{{ entry.currentRank?.rank ?? '-' }}</td>
+              <td class="column-number">{{ entry.currentRank?.trainingPointCost ?? '' }}</td>
+              <td>
+                @if (!entry.currentRank) {
+                  <span class="muted">Aún no</span>
+                } @else if (entry.ability.isFromTrainer) {
+                  <span class="muted">Instructor de mascotas</span>
+                } @else {
+                  <span class="teachers">
+                    @if (entry.areTeachersAboveLevel) {
+                      <span class="muted">Desde el {{ entry.teachers[0]?.beast?.minLevel }}:</span>
+                    }
+                    @for (teacher of entry.teachers; track teacher.beast.id) {
+                      <app-beast-link [view]="teacher" iconSize="small"/>
+                    } @empty {
+                      <span class="muted">Ninguna bestia de la Horda lo enseña</span>
+                    }
+                  </span>
+                }
+              </td>
+              <td class="muted next-rank">
+                @if (entry.nextRank; as next) {
+                  Rango {{ next.rank }} al {{ next.petLevel }}
+                }
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="timeline">
+    <h2>Qué mascota llevar</h2>
+    @for (view of petGuide.milestones(); track view.milestone.level) {
+      <app-pet-milestone-card
+        [class.current]="view.milestone.level === currentMilestoneLevel()"
+        [view]="view"
+        [isUpcoming]="view.milestone.level > playerProgress.level()"/>
+    }
+  </section>
+
+  <section class="families">
+    <h2>Familias</h2>
+    <ul class="family-grid">
+      @for (view of petGuide.familyViews(); track view.family.id) {
+        <li class="family" [class.recommended]="view.guide.tier !== 'situational'">
+          <div class="family-head">
+            <app-game-icon [icon]="view.family.icon"/>
+            <div class="family-title">
+              <h3>{{ view.family.name }}</h3>
+              <span class="muted">{{ view.guide.ability }}, {{ view.beastCount }} bestias</span>
+            </div>
+          </div>
+          <span class="chip" [class.chip-accent]="view.guide.tier === 'top'">{{ tierLabels[view.guide.tier] }}</span>
+          <p class="muted">{{ view.guide.role }}</p>
+        </li>
+      }
+    </ul>
+  </section>
+
+  <section class="rules">
+    <h2>Cómo funcionan en Forever</h2>
+    <ul class="rule-list">
+      @for (rule of petGuide.rules(); track $index) {
+        <li>{{ rule }}</li>
+      }
+    </ul>
+    <p class="muted">
+      Para saber qué bestia enseña cada rango de Bite, Claw o Dash, consulta
+      <a href="https://www.wow-petopia.com/forever/abilities.php" target="_blank" rel="noopener">Petopia Forever</a>.
+    </p>
+  </section>
+</div>

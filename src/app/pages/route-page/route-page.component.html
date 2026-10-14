@@ -1,0 +1,106 @@
+<div class="page">
+  <div class="page-intro">
+    <h1>Ruta de la Horda, del 1 al 60</h1>
+    @if (gameData.levelingGuide(); as guide) {
+      <p>{{ guide.note }}</p>
+    }
+  </div>
+
+  @for (bracket of brackets(); track bracket.fromLevel) {
+    <section
+      class="bracket"
+      [class.current]="playerProgress.level() >= bracket.fromLevel && playerProgress.level() <= bracket.toLevel">
+      <header class="bracket-header">
+        <h2 class="bracket-range">{{ bracket.fromLevel }}-{{ bracket.toLevel }}</h2>
+        @if (playerProgress.level() >= bracket.fromLevel && playerProgress.level() <= bracket.toLevel) {
+          <span class="chip chip-accent">Estás aquí</span>
+        }
+      </header>
+
+      <div class="bracket-body">
+        <div class="bracket-column">
+          <h3 class="column-title">Zonas</h3>
+          <ul class="range-list">
+            @for (zone of bracket.zones; track zone.name) {
+              <li class="range-row">
+                <span class="range-name" [title]="zone.note">
+                  <span>{{ zone.name }}</span>
+                  @if (zone.spanishName !== zone.name) {
+                    <span class="range-spanish-name">{{ zone.spanishName }}</span>
+                  }
+                </span>
+                <span class="range-bar" aria-hidden="true">
+                  <span
+                    class="range-fill"
+                    [style.--start]="toBarStart(zone.minLevel)"
+                    [style.--width]="toBarWidth(zone.minLevel, zone.maxLevel)"></span>
+                </span>
+                <span class="range-levels">{{ zone.minLevel }}-{{ zone.maxLevel }}</span>
+              </li>
+            }
+          </ul>
+
+          @if (bracket.dungeons.length) {
+            <h3 class="column-title">Mazmorras</h3>
+            <ul class="dungeon-list">
+              @for (entry of bracket.dungeons; track entry.dungeon.name) {
+                <li class="dungeon" [class.unavailable]="entry.dungeon.faction === 'alliance'">
+                  <div class="dungeon-head">
+                    <span class="dungeon-name">{{ entry.dungeon.name }}</span>
+                    @if (entry.dungeon.isNew) {
+                      <span class="chip chip-accent">Nueva</span>
+                    }
+                    <span class="range-levels">{{ entry.dungeon.minLevel }}-{{ entry.dungeon.maxLevel }}</span>
+                  </div>
+                  <p class="muted dungeon-zone">
+                    {{
+                      entry.dungeon.zone +
+                        (entry.dungeon.zoneSpanishName !== entry.dungeon.zone ? ' (' + entry.dungeon.zoneSpanishName + ')' : '') +
+                        (entry.dungeon.note ? '. ' + entry.dungeon.note : '')
+                    }}
+                  </p>
+                  <div class="dungeon-loot">
+                    @for (loot of entry.loot; track loot.item.id) {
+                      <app-item-link [item]="loot.item" [showName]="false" iconSize="small"/>
+                    } @empty {
+                      <span class="muted">Botín aún oculto en la beta</span>
+                    }
+                  </div>
+                </li>
+              }
+            </ul>
+          }
+        </div>
+
+        <div class="bracket-column milestones">
+          <h3 class="column-title">Hitos</h3>
+          @for (view of bracket.milestones; track view.milestone.title) {
+            <app-milestone-card [view]="view" [isUpcoming]="view.milestone.level > playerProgress.level()"/>
+          } @empty {
+            <p class="muted">Sin hitos de equipo en este tramo.</p>
+          }
+          @if (bracket.petMilestones.length) {
+            <h3 class="column-title">Mascotas</h3>
+            @for (view of bracket.petMilestones; track view.milestone.level) {
+              <app-pet-milestone-card [view]="view" [isUpcoming]="view.milestone.level > playerProgress.level()"/>
+            }
+          }
+        </div>
+      </div>
+    </section>
+  }
+
+  @if (gameData.levelingGuide(); as guide) {
+    <section class="tips">
+      <h2>Consejos para un orco cazador</h2>
+      <div class="tip-grid">
+        @for (tip of guide.tips; track tip.title) {
+          <div class="tip">
+            <h3>{{ tip.title }}</h3>
+            <p class="muted">{{ tip.description }}</p>
+          </div>
+        }
+      </div>
+    </section>
+  }
+</div>

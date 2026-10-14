@@ -1,0 +1,14 @@
+<p class="item-name" [attr.data-quality]="item().quality">{{ item().name }}</p>
+@for (line of lines(); track $index) {
+  <p class="item-line" [class.item-effect]="line.isEffect">
+    <span>{{ line.left }}</span>
+    @if (line.right) {
+      <span>{{ line.right }}</span>
+    }
+  </p>
+}
+<p class="item-meta">Nivel de objeto {{ item().itemLevel }}</p>
+<p class="item-source">{{ sourceText() }}</p>
+@if (item().status !== 'same') {
+  <p class="item-status">{{ item().status === 'new' ? 'Nuevo en Forever' : 'Cambiado respecto a Classic' }}</p>
+}

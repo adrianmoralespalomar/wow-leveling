@@ -1,0 +1,12 @@
+@if (tooltipService.content(); as content) {
+  <div #tooltipBox class="tooltip-box" role="tooltip">
+    @switch (content.kind) {
+      @case ('item') {
+        <app-item-tooltip [item]="content.item"/>
+      }
+      @case ('spell') {
+        <app-spell-tooltip [content]="content"/>
+      }
+    }
+  </div>
+}

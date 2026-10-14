@@ -1,0 +1,47 @@
+<header class="app-header">
+  <div class="header-inner">
+    <div class="header-top">
+      <a class="brand" routerLink="/">
+        <span class="brand-name">Rastro</span>
+        <span class="brand-tagline">Cazador orco de Puntería en WoW Forever</span>
+      </a>
+      <nav class="main-nav" aria-label="Secciones">
+        @for (link of navigationLinks; track link.path) {
+          <a
+            class="nav-link"
+            [routerLink]="link.path"
+            routerLinkActive="active"
+            ariaCurrentWhenActive="page"
+            [routerLinkActiveOptions]="{ exact: link.path === '/' }">{{ link.label }}</a>
+        }
+      </nav>
+    </div>
+    <div class="header-track-row">
+      <app-level-track/>
+      <app-beta-notice/>
+    </div>
+  </div>
+</header>
+
+<main>
+  @if (gameData.hasLoadError()) {
+    <p class="notice load-error">
+      No se han podido cargar los datos de public/data. Si acabas de clonar el proyecto, ejecuta npm run data y recarga.
+    </p>
+  }
+  <router-outlet/>
+</main>
+
+<footer class="app-footer">
+  <p>
+    Datos del cliente beta de WoW Forever
+    @if (gameData.itemsBuild()) {
+      ({{ gameData.itemsBuild() }})
+    }
+    vía <a href="https://foreverchanges.pro" target="_blank" rel="noopener">foreverchanges.pro</a> y
+    <a href="https://wowforevertalent.com" target="_blank" rel="noopener">wowforevertalent.com</a>.
+    Nombres e iconos son de Blizzard Entertainment.
+  </p>
+</footer>
+
+<app-tooltip-host/>
